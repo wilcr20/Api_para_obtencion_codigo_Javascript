@@ -6,14 +6,14 @@ https://dynamiclibraryjdl.herokuapp.com/
 
 Registrar usuario
 	Tipo : POST
-	URL : http://dynamiclibraryjdl.herokuapp.com/principal/registro/
+	URL : http://dynamiclibraryjdl.herokuapp.com/registrarUsuario
 	Espera : nombre, correo y password
 	
 	Retorna  {"state":0,"data":"Usuario registrado exitosamente"}
 
 Login 
 	Tipo : GET
-	URL con ejemplo : 	http://dynamiclibraryjdl.herokuapp.com/principal/login/?			correo=joshuaenrique96@gmail.com&password=12345
+	URL con ejemplo : 	http://dynamiclibraryjdl.herokuapp.com/inciarSesion?			correo=joshuaenrique96@gmail.com&password=12345
 	
         Espera : correo y password
 
@@ -25,12 +25,12 @@ Login
 Insertar etiquetas
 
 	Tipo: POST
-	URL : http://dynamiclibraryjdl.herokuapp.com/etiquetas/insertar/
+	URL : http://dynamiclibraryjdl.herokuapp.com/registrarEtiqueta
 	Espera: nombre
 
 Obtener etiquetas 
 
 	Tipo: Get
-	URL:  http://dynamiclibraryjdl.herokuapp.com/etiquetas/obtener/
+	URL:  http://dynamiclibraryjdl.herokuapp.com/obtenerEtiquetas
 	No espera nada
 
