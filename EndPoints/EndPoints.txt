@@ -1,0 +1,36 @@
+---------------------------Ruta principal del web service -----------------------------
+
+https://dynamiclibraryjdl.herokuapp.com/
+
+--------------------------- USUARIOS   ------------------------------------
+
+Registrar usuario
+	Tipo : POST
+	URL : http://dynamiclibraryjdl.herokuapp.com/principal/registro/
+	Espera : nombre, correo y password
+	
+	Retorna  {"state":0,"data":"Usuario registrado exitosamente"}
+
+Login 
+	Tipo : GET
+	URL con ejemplo : 	http://dynamiclibraryjdl.herokuapp.com/principal/login/?			correo=joshuaenrique96@gmail.com&password=12345
+	
+        Espera : correo y password
+
+	Retorna {"state":0,"idUsuario":"1","nombreUsuario":"Josua Carranza P\u00e9rez"}
+
+
+-------------------------------------- Etiquetas -----------------------------------------
+	
+Insertar etiquetas
+
+	Tipo: POST
+	URL : http://dynamiclibraryjdl.herokuapp.com/etiquetas/insertar/
+	Espera: nombre
+
+Obtener etiquetas 
+
+	Tipo: Get
+	URL:  http://dynamiclibraryjdl.herokuapp.com/etiquetas/obtener/
+	No espera nada
+
