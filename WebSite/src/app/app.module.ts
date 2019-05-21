@@ -1,28 +1,54 @@
+import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
-import {HomeComponent} from 'src/components/home/home.component';
-import {ProfileComponent} from 'src/components/profile/profile.component';
-import {DocumentationComponent} from 'src/components/documentation/documentation.component';
-import {AuthComponent} from 'src/components/auth/auth.component';
-import {FormsModule} from '@angular/forms';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FullComponent } from './layouts/full/full.component';
+import { AppHeaderComponent } from './layouts/full/header/header.component';
+import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule} from './material-module';
+
+import { SharedModule } from './shared/shared.module';
+import { SpinnerComponent } from './shared/spinner.component';
+
+import { LoginComponent } from './Project/login/login.component';
+import { MatCardModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ProfileComponent,
-    DocumentationComponent,
-    AuthComponent
+    FullComponent,
+    LoginComponent,
+    AppHeaderComponent,
+    SpinnerComponent,
+    AppSidebarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    FlexLayoutModule,  
+    HttpClientModule,
+    SharedModule,  
+    RouterModule.forRoot(AppRoutes),
+    HttpClientModule,
+    MatCardModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [
+  {
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
