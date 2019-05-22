@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
@@ -20,6 +20,8 @@ import { SpinnerComponent } from './shared/spinner.component';
 
 import { LoginComponent } from './Project/login/login.component';
 import { MatCardModule, MatButtonModule } from '@angular/material';
+import { RegisterFunctionComponent } from './register-function/register-function.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { MatCardModule, MatButtonModule } from '@angular/material';
     LoginComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    RegisterFunctionComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,8 @@ import { MatCardModule, MatButtonModule } from '@angular/material';
     RouterModule.forRoot(AppRoutes),
     HttpClientModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [
   {

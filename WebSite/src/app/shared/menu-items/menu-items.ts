@@ -10,7 +10,8 @@ export interface Menu {
 const MENUITEMS = [
 
     /*All components must be here(components,dimensions ....)*/
-    {state: 'permisos', name: 'Permisos', type: 'link', icon: 'assignment' },
+    {state: 'home', name: 'Home', type: 'link', icon: 'home'},
+    {state: 'functionRegister', name: 'Registrar Función', type: 'link', icon: 'note_add'},
     {state: 'about', name: 'Acerca de', type: 'link', icon: 'donut_large' }
 ]; 
 

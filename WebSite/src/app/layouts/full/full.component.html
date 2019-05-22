@@ -13,6 +13,7 @@
         <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed" >
             <mat-icon style="color:aqua; border: 2px solid aqua; border-radius: 75px; width: 35px; height: 35px; padding-top: 3px">menu</mat-icon>
         </button>
+        
         <span fxFlex></span>
         <!-- ============================================================== -->
         <!-- app header component - style you can find in header.scss / header.component.ts-->
@@ -44,6 +45,8 @@
         <mat-sidenav-content class="page-wrapper">
                  
                 <div class="page-content">
+
+                    
                    
                         <router-outlet><app-spinner></app-spinner></router-outlet>
                     

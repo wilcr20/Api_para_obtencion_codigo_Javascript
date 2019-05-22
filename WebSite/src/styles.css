@@ -2,3 +2,32 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.formR {
+  margin-left: 2%;
+  font-size: 120%;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .checkBoxs{
+    min-width: 150px;
+    max-width: 350px;
+    width: 100%;  
+  }
+
+  .checks{
+    font-size: 90%;
+    margin-left: 2%;
+    color: rgb(84, 84, 144);
+  }
+
+  .mat-success {
+    background-color: rgb(38, 80, 38);
+    color: rgb(160, 157, 157);
+}
