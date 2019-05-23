@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     console.log(this.correo)
     console.log(this.password)
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/inciarSesion?correo=" + this.correo + "&password=" + this.password, true);
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?correo=" + this.correo + "&password=" + this.password, true);
     xhttp.onreadystatechange = function () {
       console.log(this.responseText)
     }
