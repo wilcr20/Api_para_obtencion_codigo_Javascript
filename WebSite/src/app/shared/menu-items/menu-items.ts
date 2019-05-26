@@ -12,6 +12,7 @@ const MENUITEMS = [
     /*All components must be here(components,dimensions ....)*/
     {state: 'home', name: 'Home', type: 'link', icon: 'home'},
     {state: 'functionRegister', name: 'Registrar Función', type: 'link', icon: 'note_add'},
+    {state: 'doc', name: 'Documentación', type: 'link', icon: 'library_books'},
     {state: 'about', name: 'Acerca de', type: 'link', icon: 'donut_large' }
 ]; 
 

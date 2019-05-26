@@ -78,35 +78,43 @@ export class RegisterFunctionComponent implements OnInit {
   funciones=  [
     {
       nombre: "func1",
-      id:1
+      id:1,
+      descripcion: "Hace algo"
     },
     {
       nombre: "func2",
-      id:2
+      id:2,
+      descripcion: "Descripcion random "
     },
     {
       nombre: "func3",
-      id:3
+      id:3,
+      descripcion: "Hace algo"
     },
     {
       nombre: "func4",
-      id:4
+      id:4,
+      descripcion: "Tiene bugs por todos lados"
     },
     {
       nombre: "funcion5_con nombre_largo",
-      id:5
+      id:5,
+      descripcion: "Hace algo raro"
     },
     {
       nombre: "func6",
-      id:6
+      id:6,
+      descripcion: "Hace algo bueno"
     },
     {
       nombre: "func7",
-      id:7
+      id:7,
+      descripcion: "No hace nada"
     },
     {
       nombre: "func8",
-      id:8
+      id:8,
+      descripcion: "Hace algo"
     }]
 
   ngOnInit() {

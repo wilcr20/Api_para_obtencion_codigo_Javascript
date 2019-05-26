@@ -22,6 +22,7 @@ import { LoginComponent } from './Project/login/login.component';
 import { MatCardModule, MatButtonModule } from '@angular/material';
 import { RegisterFunctionComponent } from './register-function/register-function.component';
 import { HomeComponent } from './home/home.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HomeComponent } from './home/home.component';
     SpinnerComponent,
     AppSidebarComponent,
     RegisterFunctionComponent,
-    HomeComponent
+    HomeComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserModule,

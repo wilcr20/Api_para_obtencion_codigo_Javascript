@@ -4,6 +4,7 @@ import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from "./Project/login/login.component";
 import {RegisterFunctionComponent} from "./register-function/register-function.component"
 import {HomeComponent} from './home/home.component';
+import {DocumentationComponent} from './documentation/documentation.component';
 
 export const AppRoutes: Routes = 
 [
@@ -29,6 +30,11 @@ export const AppRoutes: Routes =
         {
           path: 'functionRegister',
           component: RegisterFunctionComponent
+        }
+        ,
+        {
+          path: 'doc',
+          component: DocumentationComponent
         }
      ]
   },
