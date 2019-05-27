@@ -10,10 +10,9 @@ export interface Menu {
 const MENUITEMS = [
 
     /*All components must be here(components,dimensions ....)*/
-    {state: 'home', name: 'Home', type: 'link', icon: 'home'},
-    {state: 'functionRegister', name: 'Registrar Función', type: 'link', icon: 'note_add'},
-    {state: 'doc', name: 'Documentación', type: 'link', icon: 'library_books'},
-    {state: 'about', name: 'Acerca de', type: 'link', icon: 'donut_large' }
+    {state: '/user/functions', name: 'Mis funciones', type: 'link', icon: 'home'},
+    {state: '/user/seeFunctions', name: 'Ver funciones', type: 'link', icon: 'library_books'},
+    {state: '/user/newFunction', name: 'Registrar Función', type: 'link', icon: 'note_add'}
 ]; 
 
 @Injectable()

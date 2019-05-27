@@ -23,6 +23,11 @@ import { MatCardModule, MatButtonModule } from '@angular/material';
 import { RegisterFunctionComponent } from './register-function/register-function.component';
 import { HomeComponent } from './home/home.component';
 import { DocumentationComponent } from './documentation/documentation.component';
+import { MainComponent} from './main-component/main-component.component';
+import { UserFunctionsComponent } from './user-functions/user-functions.component';
+import { SeeFunctionsComponent } from './see-functions/see-functions.component';
+
+import {UserMainPageModule} from './user-main-page/user-main-page.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +39,10 @@ import { DocumentationComponent } from './documentation/documentation.component'
     AppSidebarComponent,
     RegisterFunctionComponent,
     HomeComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    MainComponent,
+    UserFunctionsComponent,
+    SeeFunctionsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +51,8 @@ import { DocumentationComponent } from './documentation/documentation.component'
     FormsModule,
     FlexLayoutModule,  
     HttpClientModule,
-    SharedModule,  
+    SharedModule, 
+    UserMainPageModule,
     RouterModule.forRoot(AppRoutes),
     HttpClientModule,
     MatCardModule,

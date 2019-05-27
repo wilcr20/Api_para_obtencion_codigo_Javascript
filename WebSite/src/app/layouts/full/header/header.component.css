@@ -1,0 +1,21 @@
+.img-responsive {
+    vertical-align: middle;
+}
+
+.navElements{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.navFontSize{
+    font-size: large;
+}
+
+.navList{
+    list-style: none;
+    color: white;
+}
+
+.navFontColor{
+    color: white;
+}

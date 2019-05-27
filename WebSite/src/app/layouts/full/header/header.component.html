@@ -17,12 +17,47 @@
  <!-- ============================================================== -->
 <!-- Logo - style you can find in assets/style/header.scss -->
 <!-- ============================================================== -->
-<div class="navbar-header acomodar" style="margin: 15px"> 
-    <a class="navbar-brand" href="index.html">               
-        <!-- Logo text -->
-        <span fxShow="false" fxShow.gt-xs>
-            <!-- Light Logo text for dark background-->    
-            <img src="assets/images/navbar/tec_light_logo.png"  class="light-logo" alt="homepage">
-        </span> </a>
-</div>
+
+
+
+<ul class="navList">
+
+        <li class="navElements" *ngFor="let menuitem of menuItems.getMenuitem()"> 
+
+                <a [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'" class="navFontSize" mat-button>           
+                    <span>{{ menuitem.name }}</span> 
+                </a>
+        
+          </li>
+
+          <li class="navElements">
+                <button class="btn btn-success" style="font-size: large;"> <a class="navFontColor" [routerLink]="['/login']">  Login / Registro</a> </button>
+      
+      
+          </li>
+        
+          <li class="navElements">
+                <a href="index.html">               
+                        <!-- Logo text -->
+                       
+                            <!-- Light Logo text for dark background-->    
+                            <img src="assets/images/navbar/tec_light_logo.png"  class="light-logo" alt="homepage">
+                        </a>
+        
+          </li>
+
+          
+
+
+</ul>
+
+
+  
+
+
+
+                 
+           
+
+
 

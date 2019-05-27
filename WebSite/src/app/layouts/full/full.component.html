@@ -18,7 +18,14 @@
         <!-- ============================================================== -->
         <!-- app header component - style you can find in header.scss / header.component.ts-->
         <!-- ============================================================== -->
-        <app-header></app-header>
+        <div class="navbar-header acomodar" style="margin: 15px"> 
+                <a class="navbar-brand" href="index.html">               
+                    <!-- Logo text -->
+                    <span fxShow="false" fxShow.gt-xs>
+                        <!-- Light Logo text for dark background-->    
+                        <img src="assets/images/navbar/tec_light_logo.png"  class="light-logo" alt="homepage">
+                    </span> </a>
+            </div>
 
         
     </mat-toolbar>
@@ -48,7 +55,7 @@
 
                     
                    
-                        <router-outlet><app-spinner></app-spinner></router-outlet>
+                        <router-outlet></router-outlet>
                     
                 </div>    
                

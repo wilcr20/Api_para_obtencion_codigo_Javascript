@@ -5,19 +5,29 @@ import { LoginComponent } from "./Project/login/login.component";
 import {RegisterFunctionComponent} from "./register-function/register-function.component"
 import {HomeComponent} from './home/home.component';
 import {DocumentationComponent} from './documentation/documentation.component';
+import {MainComponent} from './main-component/main-component.component';
+
+
 
 export const AppRoutes: Routes = 
 [
   {
       path: '',
-      component: FullComponent,
+      component: MainComponent,
       children: 
       [
         {
           /*Loads the module in charge of showing the child components*/
           path: '',
-          loadChildren: './Project/ComponentsProject.module#ComponentsProjectModule'
+          redirectTo: 'login',
+          pathMatch: 'full'
         },
+
+        {
+          path: 'user',
+          loadChildren : '../user-main-page/user-main-page.module#UserMainPageModule'
+        },
+
         {
           /*Loads the module in charge of showing the child components*/
           path: 'home',
@@ -27,20 +37,24 @@ export const AppRoutes: Routes =
           path: 'login',
           component: LoginComponent
         },
+
+
+
         {
-          path: 'functionRegister',
-          component: RegisterFunctionComponent
-        }
-        ,
+          path: 'functionsAvailable',
+          component: DocumentationComponent
+        },
+
         {
-          path: 'doc',
+          path: 'about',
           component: DocumentationComponent
         }
+
      ]
   },
   {
     path: '**',
-    component: HomeComponent
+    component: MainComponent
   }
 
   

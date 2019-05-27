@@ -10,15 +10,15 @@
     <!-- ============================================================== -->
     <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> Nombre Usuario <i class="ti-angle-down font-12 m-l-5"></i></a></div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
-        <button mat-menu-item><mat-icon>check_circle</mat-icon> Iniciar Sesión </button>
-        <button mat-menu-item><mat-icon>exit_to_app</mat-icon> Cerrar Sesión </button>
+        
+        <button mat-menu-item><mat-icon>exit_to_app</mat-icon> <a href="index.html"> Cerrar Sesión </a> </button>
     </mat-menu>
 </div>
 
 <!-- Menu Items -->
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected" group="{{menuitem.state}}">
-        <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+        <a class="" appAccordionToggle [routerLink]="menuitem.state" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon> 
             <span>{{ menuitem.name }}</span> 
             <span fxFlex></span> 
