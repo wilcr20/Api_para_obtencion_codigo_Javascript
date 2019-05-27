@@ -13,7 +13,7 @@ Registrar usuario
 
 Login 
 	Tipo : GET
-	URL con ejemplo : 	https://dynamiclibraryjdl.herokuapp.com/inciarSesion?			correo=joshuaenrique96@gmail.com&password=12345
+	URL con ejemplo : 	https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?			correo=joshuaenrique96@gmail.com&password=12345
 	
         Espera : correo y password
 
@@ -33,4 +33,24 @@ Obtener etiquetas
 	Tipo: Get
 	URL:  https://dynamiclibraryjdl.herokuapp.com/obtenerEtiquetas
 	No espera nada
+
+
+------------------------------------  Funciones --------------------------------------------
+
+
+Insertar
+	Tipo : POST
+	URL :  https://dynamiclibraryjdl.herokuapp.com/registrarFuncion
+	Espera : idUsuario,nombre,descripcion,codigo, dependencias,etiquetas
+	NOTAS : Dependencia y etiquetas son un string de id's separadas por espacio
+
+Obtener 
+	Tipo: GET
+	URL : https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones
+	Espera: porUsuario
+	NOTAS: Un cero indica que se quieren recuperar todas las funciones, para cualquier otro valor se entiende que hay que retornar las funciones de un usuario en específico cuya id se encuentra almacenada en el parámetro porUsuario.
+
+
+
+
 

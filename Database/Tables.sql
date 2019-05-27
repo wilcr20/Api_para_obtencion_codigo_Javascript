@@ -18,7 +18,7 @@ CREATE TABLE Funciones(
 	CodeJS		TEXT	NOT NULL, -- no tengo idea de que cantidad poner aqui, es mejor crear un archivo y almacenarlo en el servidor xD 
 						  -- y luego solo se maneja la referencia mediante direccion del archivo .txt
 	VecesUtilizadas	INT DEFAULT(0)	NOT NULL,
-
+	contadorVersiones INT DEFAULT(0) NOT NULL,
 	CONSTRAINT PK_ID_Funciones PRIMARY KEY (ID),
 	CONSTRAINT FK_ID_Usuario_Funciones FOREIGN KEY (ID_Usuario) REFERENCES Usuarios (ID) ON UPDATE CASCADE ON DELETE CASCADE
 );
