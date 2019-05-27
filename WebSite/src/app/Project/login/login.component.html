@@ -1,0 +1,16 @@
+<div class="container login">
+  <mat-card class="example-card login">
+    <mat-card-title class="title">GitTEC</mat-card-title>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Correo" type="email" [(ngModel)]="correo">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Contraseña" type="password" [(ngModel)]="password">
+    </mat-form-field>
+
+    <button class="btn btn-success" style="margin-right: 5%; margin: 5%" (click)="login()">Login</button>
+    <button mat-raised-button color="primary">Registrarse</button>
+  </mat-card>
+</div>
