@@ -8,6 +8,7 @@ import { MenuItems } from '../../../shared/menu-items/menu-items';
 })
 export class AppSidebarComponent {
   mobileQuery: MediaQueryList;
+  private name : string;
   
   private _mobileQueryListener: () => void;
 
@@ -15,6 +16,7 @@ export class AppSidebarComponent {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.name = localStorage.getItem('nombreUsuario')
   }
 
   ngOnDestroy(): void {

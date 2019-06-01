@@ -20,6 +20,9 @@ export class MainComponent implements OnDestroy, AfterViewInit {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    var name = localStorage.getItem('nombreUsuario')
+    menuItems.getMenuitem()
+    
   }
 
   ngOnDestroy(): void {
