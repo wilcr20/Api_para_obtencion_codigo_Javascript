@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: '',   component: FullComponent, 
     children :[
         {   path: '', redirectTo: 'home', pathMatch: 'full' },
-        {   path: 'functions',   component: UserFunctionsComponent},
-        {   path: 'newFunction',   component: RegisterFunctionComponent},
-        {   path: 'seeFunctions',   component: SeeFunctionsComponent}]
+        {   path: 'user/functions',   component: UserFunctionsComponent},
+        {   path: 'user/newFunction',   component: RegisterFunctionComponent},
+        {   path: 'user/seeFunctions',   component: SeeFunctionsComponent}]
   },
 ];
 

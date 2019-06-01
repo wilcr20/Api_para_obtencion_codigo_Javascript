@@ -22,14 +22,11 @@ export const AppRoutes: Routes =
            path: '',
            redirectTo: 'login',
            pathMatch: 'full'
-         },
-
-         
+         },       
         {
           path: 'user',
-          loadChildren : '../user-main-page/user-main-page.module#UserMainPageModule'
+          loadChildren : './user-main-page/user-main-page.module#UserMainPageModule'
         },
-
         {
           /*Loads the module in charge of showing the child components*/
           path: 'home',

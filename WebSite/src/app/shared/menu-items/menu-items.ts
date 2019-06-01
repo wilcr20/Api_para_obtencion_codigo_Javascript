@@ -10,15 +10,15 @@ export interface Menu {
 const MENUITEMS = [
 
     /*All components must be here(components,dimensions ....)*/
-    {state: '/functions', name: 'Mis funciones', type: 'link', icon: 'home'},  ///user/functions
-    {state: '/seeFunctions', name: 'Ver funciones', type: 'link', icon: 'library_books'},
-    {state: '/newFunction', name: 'Registrar Función', type: 'link', icon: 'note_add'}
+    {state: '/user/functions', name: 'Mis funciones', type: 'link', icon: 'home'},  ///user/functions
+    {state: '/user/seeFunctions', name: 'Ver funciones', type: 'link', icon: 'library_books'},
+    {state: '/user/newFunction', name: 'Registrar Función', type: 'link', icon: 'note_add'}
 ]; 
 
 @Injectable()
 
 export class MenuItems {
-  getMenuitem(): Menu[] {
+  getMenuitem(): Menu[] { 
     return MENUITEMS;
   }
 

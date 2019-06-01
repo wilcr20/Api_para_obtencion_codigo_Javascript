@@ -6,7 +6,7 @@
 
 <div style="float: left">
     <form class="formR" id="f1">
-        <mat-form-field>
+        <mat-form-field> 
             <input id="name" autocomplete="off" matInput placeholder="Nombre de
                 la función"
                 [formControl]="textFormControl"
@@ -58,13 +58,13 @@
 <div style="float: right; margin-right: 2%">
     <form class="formR">
 
-        <div class="checkBoxs">
+        <div class="checkBoxs" *ngIf="listaEtiquetas.length>0">
             <h4><u>Etiquetas a utilizar</u> </h4>
-            <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}"
+            <mat-checkbox  name="etiqueta" class="checks" id="check,{{item.id}}"
                 *ngFor="let
                 item of
-                lista;let i= index">{{item.nombre}}</mat-checkbox>
-            <mat-form-field> <input name="tag" matInput placeholder="Nueva
+                listaEtiquetas;let i= index">{{item.nombre}}</mat-checkbox>
+            <mat-form-field> <input id="nameEtiqueta" name="tag" matInput placeholder="Nueva
                     etiqueta
                     (opcional)">
                 <button (click)="registraEtiqueta()" mat-button color="primary"
