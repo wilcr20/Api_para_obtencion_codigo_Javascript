@@ -31,6 +31,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+  async registrar(){
+    var xhttp;
+    console.log(this.correo)
+    console.log(this.password)
+  }
+
   async login() {
     var xhttp;
     console.log(this.correo)

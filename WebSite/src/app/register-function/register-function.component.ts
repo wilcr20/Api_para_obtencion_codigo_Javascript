@@ -18,6 +18,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterFunctionComponent implements OnInit {
 
+  nombreFuncion="";
+  descFuncion="";
+  codeFuncion="";
+
 
   //Validadores a implementar en formulario
   emailFormControl = new FormControl('', [
@@ -44,49 +48,6 @@ export class RegisterFunctionComponent implements OnInit {
 
   listaFunciones: any = [];
 
-
-  funciones = [
-    {
-      nombre: "func1",
-      id: 1,
-      descripcion: "Hace algo"
-    },
-    {
-      nombre: "func2",
-      id: 2,
-      descripcion: "Descripcion random "
-    },
-    {
-      nombre: "func3",
-      id: 3,
-      descripcion: "Hace algo"
-    },
-    {
-      nombre: "func4",
-      id: 4,
-      descripcion: "Tiene bugs por todos lados"
-    },
-    {
-      nombre: "funcion5_con nombre_largo",
-      id: 5,
-      descripcion: "Hace algo raro"
-    },
-    {
-      nombre: "func6",
-      id: 6,
-      descripcion: "Hace algo bueno"
-    },
-    {
-      nombre: "func7",
-      id: 7,
-      descripcion: "No hace nada"
-    },
-    {
-      nombre: "func8",
-      id: 8,
-      descripcion: "Hace algo"
-    }]
-
   ngOnInit() {
     // Al iniciar vista se traen las etiquetas y funciones desde DB
     this.obtenerEtiquetasBD()
@@ -94,10 +55,9 @@ export class RegisterFunctionComponent implements OnInit {
   }
 
 
-  obtenerEtiquetasBD() {
+  async obtenerEtiquetasBD() {
     var xhttp;
     var oldThis = this;
-  
     xhttp = new XMLHttpRequest();
     xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerEtiquetas", true);
     xhttp.onreadystatechange = function () {
@@ -106,39 +66,41 @@ export class RegisterFunctionComponent implements OnInit {
         oldThis.listaEtiquetas = data.data;
       }
     }
-    
+    xhttp.send();
     //this.router.navigate(['/main']);    
-
   }
-
-  obtenerFuncionesBD() {
+ 
+  async obtenerFuncionesBD() {
     var xhttp;
     var oldThis = this;
+    
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones", true);
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones?porUsuario=0", true);
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText)
-        oldThis.listaFunciones = this.responseText;
-        //console.log("Funciones: ",oldThis.listaFunciones)
+        //console.log(this.responseText)
+        let data = JSON.parse(this.responseText);
+        oldThis.listaFunciones = data.functions;
       }
     }
-    xhttp.send("porUsuario="+0);
+    xhttp.send();
   }
 
 
   registraEtiqueta() {
-    let etiquetaNombre = (<HTMLInputElement>document.getElementById("nameEtiqueta")).value;
-    console.log(etiquetaNombre)
-
+    
+    var etiquetaNombre = (<HTMLInputElement>document.getElementById("nameEtiqueta")).value;
+    var oldThis = this;
     if (etiquetaNombre != "") {
       var xhttp;
       xhttp = new XMLHttpRequest();
       xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarEtiqueta", true);
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-          console.log("Response  de agregar etiqueta: ", this.responseText)
-          //oldThis.obtenerEtiquetasBD()
+          oldThis.obtenerEtiquetasBD()
+          alert("Etiqueta agregada correctamente. Actualizando .....")
+          let a = (<HTMLInputElement>document.getElementById("nameEtiqueta")).value= "";
         }
       }
       xhttp.send("nombre=" + etiquetaNombre);
@@ -146,12 +108,6 @@ export class RegisterFunctionComponent implements OnInit {
     }
 
   }
-
-
-
-
-
-
 
 
 
@@ -163,10 +119,12 @@ export class RegisterFunctionComponent implements OnInit {
       let c = checkList[index] as HTMLInputElement;
       if (c.checked) { //Si esta seleccionada
         let id = c.id.split(",")[1].split("-")[0];
-        dependeciasUsar = dependeciasUsar + id + ",";
+        if(dependeciasUsar== ""){dependeciasUsar = dependeciasUsar + id;}else{
+          dependeciasUsar= dependeciasUsar+" "+ id;
+        }
       }
     }
-    return dependeciasUsar;  // Type: "1,2,5,34"
+    return dependeciasUsar;  // Type: "1 2 5 34"
   }
 
   uneEtiquetas() {
@@ -178,33 +136,47 @@ export class RegisterFunctionComponent implements OnInit {
       let c = checkList[index] as HTMLInputElement;
       if (c.checked) { //Si esta seleccionada
         let id = c.id.split(",")[1].split("-")[0];
-        etiquetasUsar = etiquetasUsar + id + ",";
+        if(etiquetasUsar== ""){etiquetasUsar = etiquetasUsar + id;}else{
+          etiquetasUsar= etiquetasUsar+" "+ id;
+        }
+        
       }
     }
-    return etiquetasUsar;  // Type: "1,2,5,34"
+    
+    return etiquetasUsar;  // Type: "1 2 5 34"
 
   }
 
-  registerFunction() {
+  resetForm(){
+    this.nombreFuncion="";
+    this.descFuncion="";
+    this.codeFuncion="";
 
+    //tambien falta desmarcar los checks
 
-    let etiquetas = this.uneEtiquetas();
-    let dependencias = this.uneDependencias()
+  }
 
-    let json = {
-      ID: " serial",
-      ID_usuario: "se obtiene de la sesion",
-      Nombre: (<HTMLInputElement>document.getElementById("name")).value,
-      Descripcion: (<HTMLInputElement>document.getElementById("description")).value,
-      CodeJs: (<HTMLInputElement>document.getElementById("code")).value
-    }
+  async registerFunction() {
 
-    alert("Registro: " + JSON.stringify(json));
-    alert("Etiquetas a usar (ids): " + etiquetas);
-    alert("Dependencias a funciones a usar (ids): " + dependencias)
+    var etiquetas = this.uneEtiquetas();
+    var dependencias = this.uneDependencias()
+    console.log(etiquetas.split(" "))
+    var oldThis = this;
 
-
-
+    var xhttp;
+      xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarFuncion", true);
+      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          oldThis.obtenerFuncionesBD() //Acutualiza la lista de funciones
+          alert("Funcion agregada correctamente. Actualizando .....")
+          oldThis.resetForm()
+        }
+      }
+      xhttp.send("idUsuario=1&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
+    
+   
   }
 
 

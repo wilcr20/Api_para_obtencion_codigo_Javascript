@@ -7,7 +7,7 @@
 <div style="float: left">
     <form class="formR" id="f1">
         <mat-form-field> 
-            <input id="name" autocomplete="off" matInput placeholder="Nombre de
+            <input id="name" autocomplete="off" [(ngModel)]="nombreFuncion" matInput placeholder="Nombre de
                 la función"
                 [formControl]="textFormControl"
                 [errorStateMatcher]="matcher">
@@ -19,7 +19,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <textarea autocomplete="off" id="description" rows="4" cols="70"
+            <textarea autocomplete="off" id="description" [(ngModel)]="descFuncion" rows="4" cols="70"
                 matInput placeholder="Descripción de la
                 función"
                 [formControl]="descrFormControl"
@@ -32,7 +32,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <textarea id="code" autocomplete="off" rows="11" cols="70" matInput
+            <textarea id="code" autocomplete="off" [(ngModel)]="codeFuncion" rows="11" cols="70" matInput
                 placeholder="Coloque el
                 código
                 fuente de la función aquí."
@@ -54,11 +54,11 @@
     <br>
 </div>
 
-
+ 
 <div style="float: right; margin-right: 2%">
     <form class="formR">
 
-        <div class="checkBoxs" *ngIf="listaEtiquetas.length>0">
+         <div class="checkBoxs" >  <!--*ngIf="listaEtiquetas.length>0" -->
             <h4><u>Etiquetas a utilizar</u> </h4>
             <mat-checkbox  name="etiqueta" class="checks" id="check,{{item.id}}"
                 *ngFor="let
@@ -73,7 +73,7 @@
         </div>
         <br>
 
-        <div class="checkBoxs">
+        <div class="checkBoxsFunctions">
             <h4> <u>Dependencia a otras funciones</u> </h4>
             <table class="table">
                 <thead>
@@ -82,7 +82,7 @@
                         <th scope="col">Descripción</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let item of funciones;let i= index">
+                <tbody *ngFor="let item of listaFunciones;let i= index">
                     <tr>
                         <mat-checkbox name="dependencia" class="checks"
                             id="depend,{{item.id}}"> {{item.nombre}}</mat-checkbox>
