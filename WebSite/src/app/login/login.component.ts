@@ -23,15 +23,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  async delay(delayInms) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(2);
-      }, delayInms);
-    });
-  }
-
-
   async registrar(){
     var xhttp;
     console.log(this.correo)
