@@ -11,5 +11,16 @@ export class UserFunctionsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  func = [
+    {
+      nombre: "Sumar",
+      id: 13,
+      descripcion: "suma numeros :v"
+    },
+    {
+      nombre: "Restar",
+      id: 34,
+      descripcion: "resta numeros :v"
+    }
+  ]
 }
