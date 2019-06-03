@@ -9,7 +9,6 @@ export interface Menu {
 
 const MENUITEMS = [
 
-    /*All components must be here(components,dimensions ....)*/
     {state: '/user/functions', name: 'Mis funciones', type: 'link', icon: 'home'},  ///user/functions
     {state: '/user/seeFunctions', name: 'Ver funciones', type: 'link', icon: 'library_books'},
     {state: '/user/newFunction', name: 'Registrar Función', type: 'link', icon: 'note_add'}

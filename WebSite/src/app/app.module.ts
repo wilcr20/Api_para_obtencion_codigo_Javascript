@@ -19,8 +19,8 @@ import { MaterialModule } from './material-module';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 
-import { LoginComponent } from './login/login.component';
-import { MatCardModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { LoginComponent, DialogUserRegister } from './login/login.component';
+import { MatCardModule, MatButtonModule, MatSnackBarModule, MatDialogModule } from '@angular/material';
 import { RegisterFunctionComponent } from './register-function/register-function.component';
 import { HomeComponent } from './home/home.component';
 import { DocumentationComponent } from './documentation/documentation.component';
@@ -36,6 +36,7 @@ import { UserMainPageModule } from './user-main-page/user-main-page.module';
     AppComponent,
     FullComponent,
     LoginComponent,
+    DialogUserRegister,
     AppHeaderComponent,
     SpinnerComponent,
     AppSidebarComponent,
@@ -44,7 +45,7 @@ import { UserMainPageModule } from './user-main-page/user-main-page.module';
     DocumentationComponent,
     MainComponent,
     UserFunctionsComponent,
-    SeeFunctionsComponent
+    SeeFunctionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,8 @@ import { UserMainPageModule } from './user-main-page/user-main-page.module';
     MatCardModule,
     MatSnackBarModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule    
   ],
   providers: [
     {
@@ -68,6 +70,7 @@ import { UserMainPageModule } from './user-main-page/user-main-page.module';
       useClass: HashLocationStrategy
     }
   ],
+  entryComponents: [DialogUserRegister],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
