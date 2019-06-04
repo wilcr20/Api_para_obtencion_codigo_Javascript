@@ -1,3 +1,21 @@
-<p>
-  user-functions works!
-</p>
+<div class="container">
+  <mat-card-title>
+    Mis funciones
+  </mat-card-title><br>
+  <mat-card-subtitle>
+    <h5>Al dar click en alguna función, podrás ver el código fuente de la misma</h5>
+  </mat-card-subtitle><hr style="border-top: 1px solid #030303;">
+
+  <mat-list>
+    <mat-list-item *ngFor="let function of functions">
+      <mat-icon matListIcon>code</mat-icon>
+      <a matLine style="color:rgb(27, 108, 110)" target="_blank"
+        href="https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion={{function.id}}"> {{function.nombre}}
+      </a>
+      <p matLine>
+        <span> {{function.subject}} </span>
+        <span class="demo-2"> <i>{{function.descripcion}}</i> </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+</div>

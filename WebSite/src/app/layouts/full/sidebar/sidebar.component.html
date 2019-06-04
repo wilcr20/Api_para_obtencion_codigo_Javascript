@@ -8,10 +8,10 @@
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> Nombre Usuario <i class="ti-angle-down font-12 m-l-5"></i></a></div>
+    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> {{name}} <i class="ti-angle-down font-12 m-l-5"></i></a></div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         
-        <button mat-menu-item><mat-icon>exit_to_app</mat-icon> <a href="index.html"> Cerrar Sesión </a> </button>
+        <button mat-menu-item><mat-icon>exit_to_app</mat-icon> <a href="login"> Cerrar Sesión </a> </button>
     </mat-menu>
 </div>
 

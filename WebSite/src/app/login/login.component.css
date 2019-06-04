@@ -2,7 +2,11 @@
     width: 100%;
   }  
   .example-card {
-    max-width: 500px;
+    max-width: 600px;
+  }
+  .mat-card{
+    background-color: #eaeaea;
+    border-style: outset
   }
   .login {
     margin-left: auto;
@@ -12,7 +16,7 @@
   }
   .example-form {
     min-width: 150px;
-    max-width: 500px;
+    max-width: 600px;
     width: 100%;
   }
   

@@ -1,97 +1,90 @@
-<div>
-    <h1> <i> Formulario para registro de funciones </i> </h1>
-</div>
-<hr style="border-top: 1px solid #030303;">
+<div class="container">
+    <div>
+        <h1> <i> Formulario para registro de funciones </i> </h1>
+    </div>
+    <hr style="border-top: 1px solid #030303;">
 
 
-<div style="float: left">
-    <form class="formR" id="f1">
-        <mat-form-field>
-            <input id="name" autocomplete="off" matInput placeholder="Nombre de
-                la función"
-                [formControl]="textFormControl"
-                [errorStateMatcher]="matcher">
+    <div style="float: left">
+        <form class="formR" id="f1">
+            <mat-form-field>
+                <input id="name" autocomplete="off" [(ngModel)]="nombreFuncion" matInput placeholder="Nombre de
+                la función" [formControl]="textFormControl" [errorStateMatcher]="matcher">
 
-            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-            <mat-error *ngIf="textFormControl.hasError('required')">
-                Por favor complete este campo.
-            </mat-error>
-        </mat-form-field>
+                <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                <mat-error *ngIf="textFormControl.hasError('required')">
+                    Por favor complete este campo.
+                </mat-error>
+            </mat-form-field>
 
-        <mat-form-field>
-            <textarea autocomplete="off" id="description" rows="4" cols="70"
-                matInput placeholder="Descripción de la
-                función"
-                [formControl]="descrFormControl"
-                [errorStateMatcher]="matcher"></textarea>
+            <mat-form-field>
+                <textarea autocomplete="off" id="description" [(ngModel)]="descFuncion" rows="4" cols="70" matInput
+                    placeholder="Descripción de la
+                función" [formControl]="descrFormControl" [errorStateMatcher]="matcher"></textarea>
 
-            <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-            <mat-error *ngIf="descrFormControl.hasError('required')">
-                Por favor complete este campo.
-            </mat-error>
-        </mat-form-field>
+                <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+                <mat-error *ngIf="descrFormControl.hasError('required')">
+                    Por favor complete este campo.
+                </mat-error>
+            </mat-form-field>
 
-        <mat-form-field>
-            <textarea id="code" autocomplete="off" rows="11" cols="70" matInput
-                placeholder="Coloque el
+            <mat-form-field>
+                <textarea id="code" autocomplete="off" [(ngModel)]="codeFuncion" rows="11" cols="70" matInput
+                    placeholder="Coloque el
                 código
-                fuente de la función aquí."
-                [formControl]="codeFormControl"
-                [errorStateMatcher]="matcher"></textarea>
-            <div style="margin-left: 105%">
-                <button *ngIf="!textFormControl.hasError('required') &&
+                fuente de la función aquí." [formControl]="codeFormControl" [errorStateMatcher]="matcher"></textarea>
+                <div style="margin-left: 105%">
+                    <button *ngIf="!textFormControl.hasError('required') &&
                     !descrFormControl.hasError('required') &&
-                    !codeFormControl.hasError('required')" type="button"
-                    class="btn btn-success btn-sm"
-                    (click)="registerFunction()">Registrar</button>
+                    !codeFormControl.hasError('required')" type="button" class="btn btn-success btn-sm"
+                        (click)="registerFunction()">Registrar</button>
 
-            </div>
-            <mat-error *ngIf="codeFormControl.hasError('required')">
-                Por favor complete este campo.
-            </mat-error>
-        </mat-form-field>
-    </form>
-    <br>
-</div>
+                </div>
+                <mat-error *ngIf="codeFormControl.hasError('required')">
+                    Por favor complete este campo.
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <br>
+    </div>
 
 
-<div style="float: right; margin-right: 2%">
-    <form class="formR">
+    <div style="float: right; margin-right: 2%">
+        <form class="formR">
 
-        <div class="checkBoxs">
-            <h4><u>Etiquetas a utilizar</u> </h4>
-            <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}"
-                *ngFor="let
+            <div class="checkBoxs">
+                <!--*ngIf="listaEtiquetas.length>0" -->
+                <h4><u>Etiquetas a utilizar</u> </h4>
+                <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}" *ngFor="let
                 item of
-                lista;let i= index">{{item.nombre}}</mat-checkbox>
-            <mat-form-field> <input name="tag" matInput placeholder="Nueva
+                listaEtiquetas;let i= index">{{item.nombre}}</mat-checkbox>
+                <mat-form-field> <input id="nameEtiqueta" name="tag" matInput placeholder="Nueva
                     etiqueta
                     (opcional)">
-                <button (click)="registraEtiqueta()" mat-button color="primary"
-                    class="mat-success">Añadir</button>
-            </mat-form-field>
-        </div>
-        <br>
+                    <button (click)="registraEtiqueta()" mat-button color="primary" class="mat-success">Añadir</button>
+                </mat-form-field>
+            </div>
 
-        <div class="checkBoxs">
-            <h4> <u>Dependencia a otras funciones</u> </h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let item of funciones;let i= index">
-                    <tr>
-                        <mat-checkbox name="dependencia" class="checks"
-                            id="depend,{{item.id}}"> {{item.nombre}}</mat-checkbox>
-                        <td>{{item.descripcion}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="checkBoxsFunctions">
+                <h4> <u>Dependencia a otras funciones</u> </h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of listaFunciones;let i= index">
+                        <tr>
+                            <mat-checkbox name="dependencia" class="checks" id="depend,{{item.id}}"> {{item.nombre}}
+                            </mat-checkbox>
+                            <td>{{item.descripcion}}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        </div>
+            </div>
 
-    </form>
+        </form>
+    </div>
 </div>

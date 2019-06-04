@@ -1,0 +1,48 @@
+<div mat-dialog-content>
+  <mat-form-field>
+    <input #nombre matInput placeholder="Ingrese su nombre completo" maxlength="200" [(ngModel)]="data.nombre"
+      [formControl]="nombreFC" />
+    <mat-hint align="end">{{nombre.value?.length || 0}}/200</mat-hint>
+    <mat-error *ngIf="nombreFC.hasError('required')"> Nombre <strong>requerido.</strong> </mat-error>
+    <mat-error *ngIf="nombreFC.hasError('maxlength')"> Tamaño máximo: 200 </mat-error>
+  </mat-form-field>
+
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input #email matInput placeholder="Ingrese su correo electrónico" maxlength="50" [(ngModel)]="data.correo"
+        [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Por favor ingrese una dirección de correo válida
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')"> Correo electrónico <strong>requerido </strong>
+      </mat-error>
+      <mat-hint align="end">{{email.value?.length || 0}}/50</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('maxlength')"> Tamaño máximo: 50 </mat-error>
+    </mat-form-field>
+  </form>
+
+  <mat-form-field>
+    <input #pass matInput placeholder="Ingrese su contraseña" maxlength="50" type="password" [(ngModel)]="data.password"
+      [formControl]="pass1FC" />
+    <mat-hint align="end">{{pass.value?.length || 0}}/50</mat-hint>
+    <mat-error *ngIf="pass1FC.hasError('required')"> Contraseña <strong>requerida.</strong> </mat-error>
+    <mat-error *ngIf="pass1FC.hasError('maxlength')"> Tamaño máximo: 50 </mat-error>
+  </mat-form-field>
+  <!--
+  <mat-form-field>
+    <input #pass2 matInput placeholder="Verifique su contraseña" maxlength="50" type="password" [(ngModel)]="data.password1"
+    [formControl]="pass2FC" />
+    <mat-hint align="end">{{pass2.value?.length || 0}}/50</mat-hint>
+    <mat-error *ngIf="true"> Contraseña de confirmación <strong>requerida.</strong> </mat-error>
+    <mat-error *ngIf="pass2FC.hasError('maxlength')"> Tamaño máximo: 50 </mat-error>
+  </mat-form-field>
+
+  <div >
+    <h6 *ngIf="diference()" style="color: red">La contraseña de confirmación no conincide.</h6>
+  </div>-->
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)="registrar()">Registrar</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+</div>
