@@ -25,7 +25,7 @@ export const AppRoutes: Routes =
 
         {
           path: 'user',
-          loadChildren : '../user-main-page/user-main-page.module#UserMainPageModule'
+          loadChildren : './user-main-page/user-main-page.module#UserMainPageModule'
         },
 
         {
