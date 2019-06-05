@@ -1,26 +1,40 @@
 
 
-<div>
+<div class="homeContainer">
+
+  <img src="../../assets/images/jdlIcon.png"  alt="JDL Icon" height="20%" width="20%"> 
+
+  <h1> Javascript Dynamic Library </h1>
+
   <blockquote style="margin: 1%">
-    Pretende el desarrollo de un API abierta de generación dinámico que brinde
-    al usuario la incorporación de funciones de propósitos variados que puedan
-    requerir de una o más funciones existentes, Así como la capacidad de
-    utilizar abiertamente las funciones que cualquier usuario haya registrado
-    con la capacidad de importar únicamente el código requerido para ser
-    utilizado en del desarrollo de aplicaciones Web.
+
+    La librería dinámica de Javascript (JDL) permite que las personas utilicen código escrito por alguien más
+    sin importar el lugar donde se encuentren. Asimismo, hace posible que una persona comparta su conocimiento a través
+    de las funciones que registra en el sistema. Con JDL usted utiliza únicamente el código que necesita, no descarga la 
+    librería completa, esto beneficia el rendimiento de su página web.
+
   </blockquote>
 </div>
+
 <hr>
 
-<h3>Funciones actuales del sistema</h3>
+<div>
 
-<mat-list>
-  <mat-list-item *ngFor="let message of func">
-    <mat-icon matListIcon>code</mat-icon>
-    <a matLine style="color:rgb(27, 108, 110)" target="_blank" href="https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion={{message.id}}" > {{message.nombre}} </a>
-    <p matLine> 
-      <span> {{message.subject}} </span>
-      <span class="demo-2"> <i>{{message.descripcion}}</i>  </span>
-    </p>
-  </mat-list-item>
-</mat-list>     
+    <blockquote style="margin: 1%">
+
+        <h3 class="subtitles"> ¿Cómo funciona? </h3>
+
+        Existen dos formas de utilizar la librería, ambas requieren una importación en el proyecto que usted se encuentre
+        desarrollando. La primera es importando un núcleo base de la librería que en realidad sería como una interfaz para importar
+        las funciones que se requieran. La segunda opción es importar la función por separado. Estas dos variantes de uso de la
+        librería se detallan en la sección de documentación.
+        
+        
+    
+    </blockquote>
+
+
+</div>
+
+<br> <br>
+

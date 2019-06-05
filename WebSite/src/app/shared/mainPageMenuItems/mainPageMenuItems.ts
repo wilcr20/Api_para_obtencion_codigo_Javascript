@@ -10,7 +10,7 @@ const MENUITEMS = [
 
     /*All components must be here(components,dimensions ....)*/
     {state: 'home', name: 'Inicio', type: 'link'},
-    {state: 'functionsAvailable', name: 'Funciones Disponibles', type: 'link' },
+    {state: 'documentation', name: 'Documentación', type: 'link' },
     {state: 'about', name: 'Acerca de', type: 'link' }
 ]; 
 

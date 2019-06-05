@@ -1,0 +1,35 @@
+.divCenterContent{
+
+    text-align: center;
+
+}
+
+.docTitle{
+    margin-left: 10%;
+}
+
+.docIndexOption{
+    color: cornflowerblue;
+}
+
+.docIndex{
+    margin-left: 14%;
+    
+}
+
+li{
+    font-size: 18px;
+    
+}
+
+.docContent{
+    margin-left: 3%;
+    width: 90vw;
+    font-size: 18px;
+}
+
+.subtitle2{
+    margin-left: 5%;
+    text-align: center;
+}
+

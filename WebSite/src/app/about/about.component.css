@@ -1,9 +1,9 @@
-.homeContainer{
-    text-align: center;
-}
-
 blockquote:after, blockquote:before { content: none; }
 
 .subtitles{
     color: cadetblue;
+}
+
+.divCenter{
+    text-align: center;
 }

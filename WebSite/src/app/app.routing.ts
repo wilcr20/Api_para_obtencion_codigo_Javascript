@@ -6,6 +6,7 @@ import {RegisterFunctionComponent} from "./register-function/register-function.c
 import {HomeComponent} from './home/home.component';
 import {DocumentationComponent} from './documentation/documentation.component';
 import {MainComponent} from './main-component/main-component.component';
+import { AboutComponent } from './about/about.component';
  
 
 
@@ -37,13 +38,13 @@ export const AppRoutes: Routes =
           component: LoginComponent
         },
         {
-          path: 'functionsAvailable',
+          path: 'documentation',
           component: DocumentationComponent
         },
 
         {
           path: 'about',
-          component: DocumentationComponent
+          component: AboutComponent
         }
 
      ]

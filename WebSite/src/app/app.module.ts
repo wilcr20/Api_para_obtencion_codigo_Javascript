@@ -29,6 +29,7 @@ import { UserFunctionsComponent } from './user-functions/user-functions.componen
 import { SeeFunctionsComponent } from './see-functions/see-functions.component';
 
 import { UserMainPageModule } from './user-main-page/user-main-page.module';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { UserMainPageModule } from './user-main-page/user-main-page.module';
     MainComponent,
     UserFunctionsComponent,
     SeeFunctionsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
