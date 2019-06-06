@@ -5,12 +5,84 @@
   <hr style="border-top: 1px solid #030303;">
   <mat-card-content>
     <div>
+      <div>
+        <small style="color:red">A continuación escriba o seleccione unicamente
+          en las opciones de búsqueda que desea para
+          filtrar</small><br>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Nombre" class="inputFormSmall">
-      </mat-form-field>
+      <br>
+      <mat-accordion> <!--Inicio de Paneles -->
+        <mat-expansion-panel (opened)="panelOpenState= true"
+          (closed)="panelOpenState= false"  style="border: solid 2px rgb(18, 145, 18)" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Datos Generales
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Cerrar' : 'Abrir'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!-- body -->
+          <mat-form-field>
+            <mat-label>Nombre de la función</mat-label>
+            <input matInput [(ngModel)]="nombre" class="inputFormSmall">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Descripción de la función</mat-label>
+            <input matInput [(ngModel)]="descrip"  class="inputFormSmall">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nombre del Usuario</mat-label>
+            <input matInput  [(ngModel)]="userNombre" class="inputFormSmall">
+          </mat-form-field>
+          <mat-form-field>
+              <mat-label>Codigo de funcion</mat-label>
+            <textarea id="code" autocomplete="off" id="codeJS" [(ngModel)]="code" rows="5" cols="70" matInput
+               [formControl]="codeFormControl"
+              [errorStateMatcher]="matcher"></textarea>
+          </mat-form-field>
+          <!-- body -->
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel (opened)="panelOpenState= true"
+          (closed)="panelOpenState= false"  style="border: solid 2px rgb(18, 145, 18)" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Etiquetas
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Cerrar' : 'Abrir'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!-- body -->
+          <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}"
+            *ngFor="let
+            item of
+            listaEtiquetas;let i= index">{{item.nombre}}</mat-checkbox>
+          <!-- body -->
+        </mat-expansion-panel> 
+        <!-- ------------ -->
 
-    </div>
-  </mat-card-content>
+      </mat-accordion> <!--Fin de Paneles -->
+    </div><br>
+    <button (click)="searchFunction()" style="margin-left: 40%" mat-raised-button color="warn">Realizar Búsqueda</button>
+  </mat-card-content> 
+  <br>
+  <hr>
+  <div id="resultadoBusqueda">
+      <mat-list>
+          <mat-list-item *ngFor="let function of listaResultadobusqueda">
+            <mat-icon matListIcon>code</mat-icon>
+            <a matLine style="color:rgb(27, 108, 110)" target="_blank"
+              href="https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion={{function.id}}"> {{function.nombre}}
+            </a>
+            <p matLine>
+              <span> {{function.subject}} </span>
+              <span class="demo-2"> <i>{{function.descripcion}}</i> </span>
+            </p>
+          </mat-list-item>
+        </mat-list>
+  </div> 
+
 </div>
