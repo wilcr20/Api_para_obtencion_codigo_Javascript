@@ -15,8 +15,8 @@ CREATE TABLE Funciones(
 	ID_Usuario	INT		NOT NULL,
 	Nombre		VARCHAR(50) UNIQUE	NOT NULL,
 	Descripcion	VARCHAR(200)	NOT NULL,
-	CodeJS		TEXT	NOT NULL, -- no tengo idea de que cantidad poner aqui, es mejor crear un archivo y almacenarlo en el servidor xD 
-						  -- y luego solo se maneja la referencia mediante direccion del archivo .txt
+	CodeJS		TEXT	NOT NULL, 
+						  
 	VecesUtilizadas	INT DEFAULT(0)	NOT NULL,
 	contadorVersiones INT DEFAULT(0) NOT NULL,
 	CONSTRAINT PK_ID_Funciones PRIMARY KEY (ID),
@@ -42,7 +42,7 @@ CREATE TABLE Funcion_Etiquetas(
 );
 
 /* VERSIONES */
-CREATE TABLE Versiones( -- supongo que esta tabla tiene ID porque no tiene pinta de ser intermedia
+CREATE TABLE Versiones( 
 	ID		SERIAL	NOT NULL,
 	ID_Funcion	INT	NOT NULL,
 	ID_Version	INT     NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE Versiones( -- supongo que esta tabla tiene ID porque no tiene pinta
 
 
 
-/* DEPENDENCIAS */ -- HAY QUE METER LOS PARAMETROS Y EJECUTARLA
+/* DEPENDENCIAS */ 
 CREATE TABLE Dependencias_Funciones(
 	ID		SERIAL	NOT NULL,
 	ID_Funcion		INT	NOT NULL,
