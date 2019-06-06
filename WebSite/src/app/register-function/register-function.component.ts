@@ -8,7 +8,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
-}
+} 
 
 
 @Component({
@@ -142,9 +142,7 @@ export class RegisterFunctionComponent implements OnInit {
         
       }
     }
-    
     return etiquetasUsar;  // Type: "1 2 5 34"
-
   }
 
   resetForm(){
