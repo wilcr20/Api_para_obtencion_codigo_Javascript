@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
     var flag = false;
 
     xhttp = new XMLHttpRequest();
+    xhttp.withCredentials = true;
     xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?correo=" + this.correo + "&password=" + this.password, true);
     xhttp.onreadystatechange = function () {
 
@@ -74,22 +75,7 @@ export class LoginComponent implements OnInit {
         flag = true;
 
       }
-      /*
-      var response = this.responseText
-      if (response != '') { // si se logeo!
-        response = JSON.parse(response)
-        if (response.state == 0) {
-          
-          
-        }
-        else {
-          flag = false;
-          localStorage.clear();
-        }
-      }
-      */   
     }
-    xhttp.withCredentials = true;
     xhttp.send();
     let delayres = await delay(2000);
     if (flag) {
