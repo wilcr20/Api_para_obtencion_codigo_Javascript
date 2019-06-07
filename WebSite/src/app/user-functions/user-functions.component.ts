@@ -37,6 +37,7 @@ export class UserFunctionsComponent implements OnInit {
         }
       }
     }
+    xhttp.withCredentials = true;
     xhttp.send();
     let delayres = await delay(1500);
     console.log(flag)

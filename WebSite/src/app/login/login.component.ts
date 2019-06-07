@@ -64,22 +64,34 @@ export class LoginComponent implements OnInit {
     xhttp = new XMLHttpRequest();
     xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?correo=" + this.correo + "&password=" + this.password, true);
     xhttp.onreadystatechange = function () {
+
+      if (this.readyState == 4 && this.status == 200) {
+        
+        let response = this.responseText;
+        response = JSON.parse(response)
+        localStorage.setItem('nombreUsuario', response.nombreUsuario);
+        localStorage.setItem('idUsuario', response.idUsuario);
+        flag = true;
+
+      }
+      /*
       var response = this.responseText
       if (response != '') { // si se logeo!
         response = JSON.parse(response)
         if (response.state == 0) {
-          localStorage.setItem('nombreUsuario', response.nombreUsuario);
-          localStorage.setItem('idUsuario', response.idUsuario);
-          flag = true;
+          
+          
         }
         else {
           flag = false;
           localStorage.clear();
         }
       }
+      */   
     }
+    xhttp.withCredentials = true;
     xhttp.send();
-    let delayres = await delay(1500);
+    let delayres = await delay(2000);
     if (flag) {
       this.openSnackBar('Bienvenido', 'Login');
       this.router.navigate(['/']);

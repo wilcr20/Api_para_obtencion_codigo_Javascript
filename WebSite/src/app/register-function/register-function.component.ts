@@ -66,6 +66,7 @@ export class RegisterFunctionComponent implements OnInit {
         oldThis.listaEtiquetas = data.data;
       }
     }
+    xhttp.withCredentials = true;
     xhttp.send();
     //this.router.navigate(['/main']);    
   }
@@ -83,6 +84,7 @@ export class RegisterFunctionComponent implements OnInit {
         oldThis.listaFunciones = data.functions;
       }
     }
+    xhttp.withCredentials = true;
     xhttp.send();
   }
 
@@ -103,6 +105,8 @@ export class RegisterFunctionComponent implements OnInit {
           let a = (<HTMLInputElement>document.getElementById("nameEtiqueta")).value= "";
         }
       }
+
+      xhttp.withCredentials = true;
       xhttp.send("nombre=" + etiquetaNombre);
 
     }
@@ -172,6 +176,7 @@ export class RegisterFunctionComponent implements OnInit {
           oldThis.resetForm()
         }
       }
+      xhttp.withCredentials = true;
       xhttp.send("idUsuario=1&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
     
    

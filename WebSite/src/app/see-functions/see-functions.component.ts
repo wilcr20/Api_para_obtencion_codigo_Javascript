@@ -45,6 +45,7 @@ export class SeeFunctionsComponent implements OnInit {
         console.log(oldThis.listaEtiquetasFunciones)
       }
     }
+    xhttp.withCredentials = true;
     xhttp.send();
   }
 
@@ -60,6 +61,7 @@ export class SeeFunctionsComponent implements OnInit {
         console.log(oldThis.listaEtiquetas)
       }
     }
+    xhttp.withCredentials = true;
     xhttp.send();
   }
 
