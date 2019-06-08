@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, NgZone, OnDestroy, ViewChild, HostListener, Directive, AfterViewInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -12,7 +14,7 @@ export class AppSidebarComponent {
   
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public menuItems: MenuItems) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public menuItems: MenuItems,private router: Router) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -20,13 +22,12 @@ export class AppSidebarComponent {
   }
 
   logOut(){
-
+    var oldThis =this;
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/logout", true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/logout", true);
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-       window.location.href="login";
+        oldThis.router.navigate(['/']);
       }
     }
 
