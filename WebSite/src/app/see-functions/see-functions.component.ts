@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 
 
 export interface FunctionElement {
@@ -13,6 +12,10 @@ export interface FunctionElement {
   descripcion: string;
   codejs: string;
   vecesutilizadas: number;
+}
+
+export interface codeFunction{
+  code:string;
 }
 
 
@@ -34,8 +37,9 @@ export class SeeFunctionsComponent implements OnInit {
   code = "";
   userNombre = "";
 
-  constructor(private _snackBar: MatSnackBar) { }
-  displayedColumns: string[] = ['nombre', 'descripcion', 'vecesutilizadas', 'id'];
+  constructor(private _snackBar: MatSnackBar, public dialog: MatDialog) { }
+
+  displayedColumns: string[] = ['nombre', 'descripcion', 'vecesutilizadas', 'id','code'];
   dataSource = new MatTableDataSource<FunctionElement>(this.listaResultadobusqueda);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -51,7 +55,16 @@ export class SeeFunctionsComponent implements OnInit {
     this._snackBar.open('https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion='+el, "OK!", {
       duration: 4000,
     });
+  }
 
+  showCode(el){
+    //Open Dialog
+    const dialogRef = this.dialog.open(SeeCodeFunction, {
+      data: { code:el }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 
@@ -260,8 +273,14 @@ export class SeeFunctionsComponent implements OnInit {
     this.code = "";
     this.userNombre = "";
   }
+}
 
 
 
-
+@Component({
+  selector: 'seeCodeFunction',
+  templateUrl: 'seeCodeFunction.html',
+})
+export class SeeCodeFunction {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: codeFunction) {}
 }

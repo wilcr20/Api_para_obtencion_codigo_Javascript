@@ -74,7 +74,7 @@
 
   <div style="padding: 2%;"></div>
 
-  <div >
+  <div>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" style="width: 100%;">
         <ng-container matColumnDef="nombre">
@@ -94,12 +94,24 @@
         </ng-container>
 
         <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            
-            <td mat-cell *matCellDef="let element">
-                <button (click)="showURL(element.id)" style="border-radius: 100%; color:rgb(26, 78, 67); background-color: white" ><mat-icon matListIcon>link</mat-icon> </button> 
-            </td>
-          </ng-container>
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="showURL(element.id)" style="border-radius: 100%;
+              color:rgb(26, 78, 67); background-color: white"><mat-icon
+                matListIcon>link</mat-icon> </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="showCode(element.codejs)" style="border-radius: 100%;
+              color:rgb(26, 78, 67); background-color: white"><mat-icon
+                matListIcon>code</mat-icon> </button>
+          </td>
+        </ng-container>
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
