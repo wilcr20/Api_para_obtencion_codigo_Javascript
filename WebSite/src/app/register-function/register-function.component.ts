@@ -65,7 +65,7 @@ export class RegisterFunctionComponent implements OnInit {
   selection = new SelectionModel<FunctionElement>(true, []);
 
   pageSize = 10;
-  pageSizeOptions = [];
+  pageSizeOptions = [5,10,20];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -116,24 +116,6 @@ export class RegisterFunctionComponent implements OnInit {
     //this.router.navigate(['/main']);    
   }
 
-  setItemsPerPage(environment){
-
-    environment.pageSizeOptions =[];
-    
-    let index= environment.pageSize;
-
-    let dataLength = environment.listaFunciones.length;
-
-    while(index <= dataLength){
-      environment.pageSizeOptions.push(index);
-      index+=index;
-    }
-
-    if (index > dataLength){
-      environment.pageSizeOptions.push(dataLength);
-    }
-    
-  }
 
   applyFilter(filterValue: string) {
     this.listaFunciones.filter = filterValue.trim().toLowerCase();
@@ -152,7 +134,7 @@ export class RegisterFunctionComponent implements OnInit {
         console.log(data);
         oldThis.listaFunciones = new MatTableDataSource<FunctionElement>(data.functions);
         oldThis.listaFunciones.paginator = oldThis.paginator;
-        oldThis.setItemsPerPage(oldThis);
+        
       }
     }
  //   xhttp.withCredentials = true;
