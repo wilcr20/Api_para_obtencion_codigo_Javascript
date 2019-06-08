@@ -223,7 +223,7 @@ export class RegisterFunctionComponent implements OnInit {
     this.nombreFuncion="";
     this.descFuncion="";
     this.codeFuncion="";
-
+    console.log("Form reset")
     //tambien falta desmarcar los checks
 
   }
