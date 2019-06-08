@@ -1,6 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild} from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { ErrorStateMatcher} from '@angular/material/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {SelectionModel} from '@angular/cdk/collections';
+import {MatPaginator} from '@angular/material/paginator';
+
+export interface FunctionElement {
+  id: number;
+  id_usuario: number;
+  nombre: string;
+  descripcion: string;
+  codejs: string;
+  vecesutilizadas: number;
+}
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -21,6 +33,8 @@ export class RegisterFunctionComponent implements OnInit {
   nombreFuncion="";
   descFuncion="";
   codeFuncion="";
+
+  isLinear=false;
 
 
   //Validadores a implementar en formulario
@@ -46,12 +60,43 @@ export class RegisterFunctionComponent implements OnInit {
 
   listaEtiquetas: any = [];
 
-  listaFunciones: any = [];
+  displayedColumns: string[] = ['select', 'nombre', 'descripcion'];
+  listaFunciones = new MatTableDataSource<FunctionElement>([]);
+  selection = new SelectionModel<FunctionElement>(true, []);
+
+  pageSize = 10;
+  pageSizeOptions = [];
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.listaFunciones.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.listaFunciones.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: FunctionElement): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
+  }
+
 
   ngOnInit() {
     // Al iniciar vista se traen las etiquetas y funciones desde DB
-    this.obtenerEtiquetasBD()
-    this.obtenerFuncionesBD()
+    this.obtenerEtiquetasBD();
+    this.obtenerFuncionesBD();
+    this.listaFunciones.paginator = this.paginator;
   }
 
 
@@ -66,9 +111,32 @@ export class RegisterFunctionComponent implements OnInit {
         oldThis.listaEtiquetas = data.data;
       }
     }
-    xhttp.withCredentials = true;
+  //  xhttp.withCredentials = true;
     xhttp.send();
     //this.router.navigate(['/main']);    
+  }
+
+  setItemsPerPage(environment){
+
+    environment.pageSizeOptions =[];
+    
+    let index= environment.pageSize;
+
+    let dataLength = environment.listaFunciones.length;
+
+    while(index <= dataLength){
+      environment.pageSizeOptions.push(index);
+      index+=index;
+    }
+
+    if (index > dataLength){
+      environment.pageSizeOptions.push(dataLength);
+    }
+    
+  }
+
+  applyFilter(filterValue: string) {
+    this.listaFunciones.filter = filterValue.trim().toLowerCase();
   }
  
   async obtenerFuncionesBD() {
@@ -76,15 +144,18 @@ export class RegisterFunctionComponent implements OnInit {
     var oldThis = this;
     
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones?porUsuario=0", true);
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFuncionesReducido", true);
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         //console.log(this.responseText)
         let data = JSON.parse(this.responseText);
-        oldThis.listaFunciones = data.functions;
+        console.log(data);
+        oldThis.listaFunciones = new MatTableDataSource<FunctionElement>(data.functions);
+        oldThis.listaFunciones.paginator = oldThis.paginator;
+        oldThis.setItemsPerPage(oldThis);
       }
     }
-    xhttp.withCredentials = true;
+ //   xhttp.withCredentials = true;
     xhttp.send();
   }
 
@@ -106,15 +177,14 @@ export class RegisterFunctionComponent implements OnInit {
         }
       }
 
-      xhttp.withCredentials = true;
+   //   xhttp.withCredentials = true;
       xhttp.send("nombre=" + etiquetaNombre);
 
     }
 
   }
 
-
-
+  
   uneDependencias() {
     let dependeciasUsar: string = "";
     let checkList = document.getElementsByName("dependencia"); //Lista de documentos HTML tipo checkbox dependencias
@@ -176,7 +246,7 @@ export class RegisterFunctionComponent implements OnInit {
           oldThis.resetForm()
         }
       }
-      xhttp.withCredentials = true;
+     // xhttp.withCredentials = true;
       xhttp.send("idUsuario=1&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
     
    

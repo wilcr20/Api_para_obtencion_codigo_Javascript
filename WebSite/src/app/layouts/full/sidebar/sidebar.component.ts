@@ -19,6 +19,21 @@ export class AppSidebarComponent {
     this.name = localStorage.getItem('nombreUsuario')
   }
 
+  logOut(){
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/logout", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+       window.location.href="login";
+      }
+    }
+
+ //   xhttp.withCredentials = true;
+    xhttp.send();
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

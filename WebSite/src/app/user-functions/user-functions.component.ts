@@ -24,7 +24,7 @@ export class UserFunctionsComponent implements OnInit {
     var flag = [];
 
     xhttp = new XMLHttpRequest();
-    xhttp.withCredentials = true;
+   // xhttp.withCredentials = true;
     xhttp.onreadystatechange = function () {
       var response = this.responseText
       if (response != '') { // si se logeo!

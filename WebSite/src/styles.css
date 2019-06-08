@@ -8,7 +8,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 120%;
   min-width: 150px;
   max-width: 500px;
-  width: 90%;
+  width: 100%;
   }
   
   .example-full-width {
@@ -18,20 +18,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .checkBoxs{
     
     min-width: 150px;
-    max-width: 560px;
     width: 100%;  
-    height: 200px;
-    width: 450px;
-    overflow-y: scroll;
+    height: 100%;
+    
   }
 
   .checkBoxsFunctions{
     min-width: 150px;
-    max-width: 560px;
+    
     width: 100%;
     height: 290px;
-    width: 450px;
-   overflow-y: scroll;
   }
 
   .checks{

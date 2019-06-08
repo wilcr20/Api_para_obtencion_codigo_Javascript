@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     var flag = false;
 
     xhttp = new XMLHttpRequest();
-    xhttp.withCredentials = true;
+   // xhttp.withCredentials = true;
     xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?correo=" + this.correo + "&password=" + this.password, true);
     xhttp.onreadystatechange = function () {
 
@@ -160,7 +160,7 @@ export class DialogUserRegister {
       }
     }
     xhttp.send("nombre=" + this.data.nombre + "&correo=" + this.data.correo + "&password=" + this.data.password);
-    let delayres = await delay(1500);
+    let delayres = await delay(2000);
     if (flag)
       this.openSnackBar('Usuario registrado correctamente', 'Registro');
     else
