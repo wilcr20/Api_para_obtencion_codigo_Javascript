@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
     let delayres = await delay(2000);
     if (flag) {
       this.openSnackBar('Bienvenido', 'Login');
-      this.router.navigate(['/']);
+      this.router.navigate(['/user']);
     }
     else
       this.openSnackBar('Error al iniciar sesión, inténtalo de nuevo', 'Error')
