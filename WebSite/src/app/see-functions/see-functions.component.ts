@@ -1,4 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
+
+export interface FunctionElement {
+  id: number;
+  id_usuario: number;
+  nombre: string;
+  descripcion: string;
+  codejs: string;
+  vecesutilizadas: number;
+}
+
 
 @Component({
   selector: 'app-see-functions',
@@ -7,17 +23,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeeFunctionsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-    // Al iniciar vista se traen las etiquetas y funciones desde DB
-    this.obtenerEtiquetasBD()
-    this.obtenerFuncionesBD()
-  }
-
   listaEtiquetas: any = [];
   listaFunciones: any = [];
-  listaResultadobusqueda: any = [];
+  listaResultadobusqueda: FunctionElement[] = [];
   listaDueñoFunciones: any = [];
   listaEtiquetasFunciones: any = [];
 
@@ -25,6 +33,26 @@ export class SeeFunctionsComponent implements OnInit {
   descrip = "";
   code = "";
   userNombre = "";
+
+  constructor(private _snackBar: MatSnackBar) { }
+  displayedColumns: string[] = ['nombre', 'descripcion', 'vecesutilizadas', 'id'];
+  dataSource = new MatTableDataSource<FunctionElement>(this.listaResultadobusqueda);
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  ngOnInit() {
+    // Al iniciar vista se traen las etiquetas y funciones desde DB
+    this.obtenerEtiquetasBD()
+    this.obtenerFuncionesBD()
+    this.dataSource.paginator = this.paginator;
+  }
+
+  showURL(el) {
+    this._snackBar.open('https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion='+el, "OK!", {
+      duration: 4000,
+    });
+
+  }
 
 
   async obtenerFuncionesBD() {
@@ -45,7 +73,7 @@ export class SeeFunctionsComponent implements OnInit {
         console.log(oldThis.listaEtiquetasFunciones)
       }
     }
-  //  xhttp.withCredentials = true;
+    //  xhttp.withCredentials = true;
     xhttp.send();
   }
 
@@ -61,7 +89,7 @@ export class SeeFunctionsComponent implements OnInit {
         console.log(oldThis.listaEtiquetas)
       }
     }
-  //  xhttp.withCredentials = true;
+    //  xhttp.withCredentials = true;
     xhttp.send();
   }
 
@@ -83,7 +111,6 @@ export class SeeFunctionsComponent implements OnInit {
 
   searchFunction() {
     var etiquetas = this.uneEtiquetas();
-    alert("BUSQUEDA " + this.nombre + " " + this.descrip + " " + this.code + " " + this.userNombre + " " + etiquetas)
     this.listaResultadobusqueda = []
     //this.resetForm()
     let code = (<HTMLInputElement>document.getElementById("codeJS")).value;
@@ -104,8 +131,10 @@ export class SeeFunctionsComponent implements OnInit {
     if (etiquetas != "") {
       this.filtroEtiqutas(etiquetas)
     }
+    this.dataSource = new MatTableDataSource<FunctionElement>(this.listaResultadobusqueda);
+    console.log("BUSQEDA RESULTADO: ", this.listaResultadobusqueda)
+    this.dataSource.paginator = this.paginator;
 
-    console.log("BUSQUEDA: ", this.listaResultadobusqueda)
   }
 
   filtroNombre() {
@@ -126,7 +155,7 @@ export class SeeFunctionsComponent implements OnInit {
         }
       }
     } else { //Si ya hay resultados en lita, filtrarla
-      for (let i = 0; i < this.listaResultadobusqueda; i++) {
+      for (let i = 0; i < this.listaResultadobusqueda.length; i++) {
         let ActualF = this.listaResultadobusqueda[i];
         if (ActualF.descripcion.toLowerCase().includes(this.descrip.toLowerCase())) {
         } else {
@@ -145,7 +174,7 @@ export class SeeFunctionsComponent implements OnInit {
         }
       }
     } else { //Si ya hay resultados en lita, filtrarla
-      for (let i = 0; i < this.listaResultadobusqueda; i++) {
+      for (let i = 0; i < this.listaResultadobusqueda.length; i++) {
         let ActualF = this.listaResultadobusqueda[i];
         if (ActualF.codejs.toLowerCase().replace(/ /g, "").includes(code.toLowerCase().replace(/ /g, ""))) {
         } else {
@@ -168,11 +197,11 @@ export class SeeFunctionsComponent implements OnInit {
       }
     }
     else { //Si ya hay resultados en lita, filtrarla
-      for (let i = 0; i < this.listaResultadobusqueda; i++) {
+      for (let i = 0; i < this.listaResultadobusqueda.length; i++) {
         let ActualF = this.listaResultadobusqueda[i];
         for (let j = 0; j < this.listaDueñoFunciones.length; j++) {
           if (this.listaDueñoFunciones[j].nombre.toLowerCase().includes(this.userNombre) && ActualF.id == this.listaDueñoFunciones[j].idFuncion) {
-          }else{
+          } else {
             this.listaResultadobusqueda.splice(i, 1); // Elimina de la lista de resultados los parametros que no concuerdan
           }
         }
@@ -201,13 +230,12 @@ export class SeeFunctionsComponent implements OnInit {
         }
       }
     }
-    console.log(this.listaResultadobusqueda.length)
     if (this.listaResultadobusqueda.length > 0) { //Si ya hay resultados en lita, filtrarla
       for (let i = 0; i < etiquetasBusca.length; i++) {  //Recorre cada etiqueta de las buscadas 1,2,5,7
         for (var keyF in this.listaResultadobusqueda) {  // Recorre y obtiene cada key de todas las funciones        
           let idFuncion = this.listaResultadobusqueda[keyF].id; // Id de cada funcion
           for (var keyE in this.listaEtiquetasFunciones) {
-            if (keyE == idFuncion) {
+            if (keyE.toString() == idFuncion.toString()) {
               for (let etiqueta = 0; etiqueta < this.listaEtiquetasFunciones[keyE].length; etiqueta++) {
                 let e = this.listaEtiquetasFunciones[keyE][etiqueta];
                 if (e.id_etiqueta == etiquetasBusca[i]) {
