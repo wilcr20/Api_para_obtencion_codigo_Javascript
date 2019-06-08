@@ -144,7 +144,7 @@ export class RegisterFunctionComponent implements OnInit {
     var oldThis = this;
     
     xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFuncionesReducido", true);
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFuncionesReducido?porUsuario=0", true);
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         //console.log(this.responseText)
