@@ -62,18 +62,16 @@ export class LoginComponent implements OnInit {
     var flag = false;
 
     xhttp = new XMLHttpRequest();
-    xhttp.withCredentials = true;
-    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?correo=" + this.correo + "&password=" + this.password, true);
+    //xhttp.withCredentials = true;
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/iniciarSesion?"+"correo=" + this.correo + "&password=" + this.password, true);
     xhttp.onreadystatechange = function () {
-
       if (this.readyState == 4 && this.status == 200) {
-        
+        console.log(this.responseText)
         let response = this.responseText;
         response = JSON.parse(response)
         localStorage.setItem('nombreUsuario', response.nombreUsuario);
         localStorage.setItem('idUsuario', response.idUsuario);
         flag = true;
-
       }
     }
     xhttp.send();
@@ -124,7 +122,7 @@ export class DialogUserRegister {
 
   matcher = new MyErrorStateMatcher();
 
-  diference(){
+  diference() {
     return this.data.password == this.data.password2;
   }
 

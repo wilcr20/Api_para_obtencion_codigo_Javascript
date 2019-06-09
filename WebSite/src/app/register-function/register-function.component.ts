@@ -167,6 +167,7 @@ export class RegisterFunctionComponent implements OnInit {
 
     var xhttp;
       xhttp = new XMLHttpRequest();
+      xhttp.withCredentials = true;
       xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarFuncion", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhttp.onreadystatechange = function () {
@@ -176,7 +177,6 @@ export class RegisterFunctionComponent implements OnInit {
           oldThis.resetForm()
         }
       }
-      xhttp.withCredentials = true;
       xhttp.send("idUsuario=1&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
     
    
