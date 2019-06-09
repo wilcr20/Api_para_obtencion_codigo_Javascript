@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     let delayres = await delay(2000);
     if (flag) {
       this.openSnackBar('Bienvenido', 'Login');
-      this.router.navigate(['/']);
+      this.router.navigate(['/user']);
     }
     else
       this.openSnackBar('Error al iniciar sesión, inténtalo de nuevo', 'Error')
@@ -158,7 +158,7 @@ export class DialogUserRegister {
       }
     }
     xhttp.send("nombre=" + this.data.nombre + "&correo=" + this.data.correo + "&password=" + this.data.password);
-    let delayres = await delay(1500);
+    let delayres = await delay(2000);
     if (flag)
       this.openSnackBar('Usuario registrado correctamente', 'Registro');
     else
