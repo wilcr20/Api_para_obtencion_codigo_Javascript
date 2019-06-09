@@ -19,7 +19,7 @@ export const AppRoutes: Routes =
 
     {
 
-      path: 'mainComponent',
+      path: 'main',
       component: MainComponent,
    
       children: 
@@ -45,8 +45,8 @@ export const AppRoutes: Routes =
 
      ]
   },
-  { path: '', redirectTo: 'mainComponent/home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'mainComponent/home',pathMatch: 'full' },
+  { path: '', redirectTo: 'main/home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main/home',pathMatch: 'full' },
 
   
 ];

@@ -219,6 +219,7 @@ export class RegisterFunctionComponent implements OnInit {
 
     var xhttp;
       xhttp = new XMLHttpRequest();
+      xhttp.withCredentials = true;
       xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarFuncion", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhttp.onreadystatechange = function () {

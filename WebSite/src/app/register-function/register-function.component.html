@@ -1,12 +1,13 @@
-<div class="container mainRegisterFunction">
+<div class="container mainRegisterFunction" style="background-color: white">
 
-    <div>
-                <h1> <i> Formulario para registro de funciones </i> </h1>
-    </div>
+        <div>
+            <h1> <i> Formulario para registro de funciones </i> </h1>
+        </div>
+
+      <hr style="border-top: 1px solid #030303;">
     
-    <hr style="border-top: 1px solid #030303;">
 
-    <div style="float: left; width: 92.5%;margin-right: 1%">
+    <div style="float: left; width: 95.5%;margin-right: 1%">
         <form class="formR" id="f1">
             <mat-form-field>
                 <input id="name" autocomplete="off" [(ngModel)]="nombreFuncion" matInput placeholder="Nombre de
@@ -54,6 +55,8 @@
         
                     <div class="checkBoxs">
                         <!--*ngIf="listaEtiquetas.length>0" -->
+                        <mat-accordion>
+
                         <h4><u>Etiquetas a utilizar</u> </h4>
                         <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}" *ngFor="let
                         item of
@@ -63,6 +66,8 @@
                             (opcional)">
                             <button (click)="registraEtiqueta()" mat-button color="primary" class="mat-success">Añadir</button>
                         </mat-form-field>
+                    </mat-accordion>
+
                     </div>
         
                     
@@ -136,6 +141,8 @@
 
         
     </div>
+
+
 
 </div>
 

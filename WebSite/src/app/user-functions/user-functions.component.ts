@@ -9,6 +9,7 @@ import { delay } from 'q';
 export class UserFunctionsComponent implements OnInit {
   private idUsuario : number;
   private functions = [];
+  private loading = true;
   constructor() { 
     this.idUsuario = parseInt(localStorage.getItem('idUsuario'));
     this.myFunctions()
@@ -24,25 +25,28 @@ export class UserFunctionsComponent implements OnInit {
     var flag = [];
 
     xhttp = new XMLHttpRequest();
-   // xhttp.withCredentials = true;
+    //xhttp.withCredentials = true;
     xhttp.onreadystatechange = function () {
       var response = this.responseText
       if (response != '') { // si se logeo!
-        response = JSON.parse(response)
-        console.log(response)
+        response = JSON.parse(response);
+        //console.log(response)
         if (response.state == 0) {
-          console.log(response.functions)
+          //console.log(response.functions)
           flag = response.functions;
+          
         }
         else {
           flag = [];
         }
       }
     }    
-    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones?porUsuario="+this.idUsuario, true);
+    xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones?"+"porUsuario="+this.idUsuario, true);
     xhttp.send();
     let delayres = await delay(2000);
-    console.log(flag)
+    //console.log(flag)
     this.functions = flag
+    if(flag.length > 0)
+      this.loading = !this.loading;
   }
 }

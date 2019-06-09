@@ -6,6 +6,10 @@
     <h5>Al dar click en alguna función, podrás ver el código fuente de la misma</h5>
   </mat-card-subtitle><hr style="border-top: 1px solid #030303;">
 
+  <div class="spinner-container" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
   <mat-list>
     <mat-list-item *ngFor="let function of functions">
       <mat-icon matListIcon>code</mat-icon>
