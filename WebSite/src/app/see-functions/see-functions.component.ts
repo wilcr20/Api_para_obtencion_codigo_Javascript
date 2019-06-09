@@ -60,6 +60,7 @@ export class SeeFunctionsComponent implements OnInit {
   showURL(el) {
     let url = 'https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion='+el;
     let newUrl = '"' +url+  '"';
+
     this._snackBar.open(' <script src= '+newUrl+'> </script> ', "OK!", {
       duration: 5500,
     });
@@ -78,9 +79,7 @@ export class SeeFunctionsComponent implements OnInit {
   showDepend(el){
     this.versionesF= []
     this.obtenerVersionesFuncion(el)
-    setTimeout(() => {
-      console.log("VERSIONES: ", this.versionesF)
-      
+    setTimeout(() => {     
       const dialogRef = this.dialog.open(DependenciaFunction, {
         data: { versiones: this.versionesF }
       });

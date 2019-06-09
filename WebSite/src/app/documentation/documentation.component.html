@@ -1,18 +1,16 @@
 <div>
 
-    <h1 class="docTitle"> En esta sección se abordan los siguientes aspectos:</h1>
-
+  <h1 class="docTitle"> En esta sección se abordan los siguientes aspectos:</h1>
 </div>
 
-<div >
+<div>
 
-    <ul class="docIndex">  
-
-        <li class="docIndexOption"> Consideraciones Generales  </li>
-        <li class="docIndexOption"> Importación del núcleo de la librería</li>
-        <li class="docIndexOption"> Importación individual de funciones </li>
-
-    </ul>
+  <ul class="docIndex">
+    <li class="docIndexOption"> Consideraciones Generales </li>
+    <li class="docIndexOption"> Importación del núcleo de la librería</li>
+    <li class="docIndexOption"> Importación individual de funciones </li>
+    <li class="docIndexOption"> Búsqueda de funciones </li>
+  </ul>
 
 </div>
 
@@ -24,27 +22,35 @@
   <ol>
 
     <li>
-      En todo momento requerirá de una conexión a internet. Esto porque la librería aún no posee un descargable que 
+      En todo momento requerirá de una conexión a internet. Esto porque la
+      librería aún no posee un descargable que
       permita utilizar las funciones de manera local.
     </li>
 
     <li>
-      Debe registrarse en el sistema e iniciar sesión para tener acceso a todas las funciones registradas. Además, usted
-      podrá registrar nuevas funciones. 
+      Debe registrarse en el sistema e iniciar sesión para tener acceso a todas
+      las funciones registradas. Además, usted
+      podrá registrar nuevas funciones.
     </li>
 
     <li>
-      Existe una sección del sistema que le permite visualizar las funciones registradas y filtrar los resultados de acuerdo
-      a sus necesidades. El mismo sistema le facilita la obtención del link de importación para cada una de las funciones
+      Existe una sección del sistema que le permite visualizar las funciones
+      registradas y filtrar los resultados de acuerdo
+      a sus necesidades. El mismo sistema le facilita la obtención del link de
+      importación para cada una de las funciones
     </li>
 
     <li>
-      Si la función que requiere importar depende de otras funciones registradas en el sistema, usted no debe importar dichas 
-      funciones individualmente. El sistema carga automáticamente las funciones de las que depende la función a importar.
+      Si la función que requiere importar depende de otras funciones registradas
+      en el sistema, usted no debe importar dichas
+      funciones individualmente. El sistema carga automáticamente las funciones
+      de las que depende la función a importar.
     </li>
     <li>
-      No debe preocuparse si comete un error e importa dos veces la misma función utilizando el núcleo de la librería. 
-      Ya que el mismo sistema se encarga de verificar esto y realiza las acciones necesarias para evitar que su página
+      No debe preocuparse si comete un error e importa dos veces la misma
+      función utilizando el núcleo de la librería.
+      Ya que el mismo sistema se encarga de verificar esto y realiza las
+      acciones necesarias para evitar que su página
       web se vea afectada.
     </li>
 
@@ -57,53 +63,90 @@
 
   <h2> Importación del núcleo de la librería</h2>
 
-  El núcleo de la librería consta básicamente de una función que permite cargar las funciones deseadas. Dicha 
+  El núcleo de la librería consta básicamente de una función que permite cargar
+  las funciones deseadas. Dicha
   función tiene como nombre <b> importarDesdeJDL </b> . A continuación
   se presenta un ejemplo de uso:
   <br><br>
   <div class="subtitle2">
 
-      <img src="../../assets/images/coreLib.PNG"  alt="JDL Core" height="60%" width="60%">
+    <img src="../../assets/images/coreLib.PNG" alt="JDL Core" height="60%"
+      width="60%">
 
   </div>
   <br><br>
 
-  En la imagen anterior se puede visualizar la importación del núcleo de la librería. Y en el ejemplo se está
+  En la imagen anterior se puede visualizar la importación del núcleo de la
+  librería. Y en el ejemplo se está
   importando la función con el identificador 45. <br> <br>
-  
-  Básicamente se requiere una etiqueta script cuyo valor en el atributo src sea <span>
-  <b> https://dynamiclibraryjdl.herokuapp.com/JDLCore </b> </span>. Esto 
-  cargará la función  <span> <b> importarDesdeJDL </b> </span> que recibe como parámetros los identificadores de las funciones
+
+  Básicamente se requiere una etiqueta script cuyo valor en el atributo src sea
+  <span>
+    <b> https://dynamiclibraryjdl.herokuapp.com/JDLCore </b> </span>. Esto
+  cargará la función <span> <b> importarDesdeJDL </b> </span> que recibe como
+  parámetros los identificadores de las funciones
   a importar. <br> <br>
 
-  Se recomienda utilizar la función <b> importarDesdeJDL </b> una vez que se tiene la seguridad de que la página se ha cargado totalmente. De 
-  lo contrario es posible que la función aún no se haya cargado y si se intenta utilizar se obtenga un error debido a que 
+  Se recomienda utilizar la función <b> importarDesdeJDL </b> una vez que se
+  tiene la seguridad de que la página se ha cargado totalmente. De
+  lo contrario es posible que la función aún no se haya cargado y si se intenta
+  utilizar se obtenga un error debido a que
   se intenta referenciar a una función que no existe. <br> <br>
-  
-  <b> NOTA: </b> Si se requiere importar más de una función se debe llamar a la función de la siguiente manera  
+
+  <b> NOTA: </b> Si se requiere importar más de una función se debe llamar a la
+  función de la siguiente manera
   <b> importarDesdeJDL( idFuncion, idFuncion, idFuncion )</b>. <br> <br>
-  
+
 
 </div>
 
 <div id="functionImport" class="docContent">
 
-    <h2> Importación individual de funciones </h2>
+  <h2> Importación individual de funciones </h2>
 
-  La importación individual de funciones se realiza a través de un link que se debe agregar al atributo src de una etiqueta
+  La importación individual de funciones se realiza a través de un link que se
+  debe agregar al atributo src de una etiqueta
   script. A continuación se presenta un ejemplo de uso:
   <br><br>
   <div class="subtitle2">
 
-      <img src="../../assets/images/coreFun.PNG"  alt="JDL Importar Función" height="60%" width="60%">
+    <img src="../../assets/images/coreFun.PNG" alt="JDL Importar Función"
+      height="60%" width="60%">
 
   </div>
-  <br><br> 
-  En el ejemplo la función a importar es aquella cuyo identificador es igual a 45. El nombre de la función importada es 
-  <b> funcion1 </b> y debe utilizarse únicamente si la página se ha cargado por completo para tener mayor seguridad con respecto
-  a que la función se cargó de manera correcta en la página. La función importada procesa un arreglo y retorna un valor
+  <br><br>
+  En el ejemplo la función a importar es aquella cuyo identificador es igual a
+  45. El nombre de la función importada es
+  <b> funcion1 </b> y debe utilizarse únicamente si la página se ha cargado por
+  completo para tener mayor seguridad con respecto
+  a que la función se cargó de manera correcta en la página. La función
+  importada procesa un arreglo y retorna un valor
   que para fines de la documentación no posee relevancia.
 
   <br> <br> <br>
+
+<div id="coreImport" class="docContent">
+  <h2> Búsqueda de funciones </h2>
+
+  En el caso de la búsqueda de funciones, se podrá realizar un filtrado muy
+  completo sobre todas las funciones existentes en el sistema.
+    Para ello se prporciona una vista similar a la siguiente mostrada, en donde
+    solo será cuestión de ingresar los datos o seleccionar las opciones
+    chekeables
+  para asi lograr hallar lo más proximo encontrado a su busqueda esperada.
+    <br><br>
+    <div class="subtitle2">
+
+      <img src="../../assets/images/busqueda.PNG" alt="JDL Core" height="60%"
+        width="80%">
+      <br><br>
+      <img src="../../assets/images/busqueda2.PNG" alt="JDL Core" height="60%"
+        width="80%">
+
+
+    </div>
+    <br><br>
+
+  </div>
 
 </div>
