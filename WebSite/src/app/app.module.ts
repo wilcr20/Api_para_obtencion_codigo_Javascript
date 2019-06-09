@@ -24,7 +24,7 @@ import { HomeComponent } from './home/home.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 import { MainComponent } from './main-component/main-component.component';
 
-import { SeeFunctionsComponent, SeeCodeFunction} from './see-functions/see-functions.component'
+import { SeeFunctionsComponent, SeeCodeFunction,DependenciaFunction} from './see-functions/see-functions.component'
 
 import { AboutComponent } from './about/about.component';
 import {UserMainPageModule} from './user-main-page/user-main-page.module';
@@ -36,6 +36,7 @@ import {UserMainPageModule} from './user-main-page/user-main-page.module';
     LoginComponent,
     DialogUserRegister,
     SeeCodeFunction,
+    DependenciaFunction,
     SpinnerComponent,
     HomeComponent,
     AppHeaderComponent,
@@ -65,7 +66,7 @@ import {UserMainPageModule} from './user-main-page/user-main-page.module';
       useClass: HashLocationStrategy
     }
   ],
-  entryComponents: [DialogUserRegister,SeeCodeFunction ],
+  entryComponents: [DialogUserRegister,SeeCodeFunction,DependenciaFunction ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

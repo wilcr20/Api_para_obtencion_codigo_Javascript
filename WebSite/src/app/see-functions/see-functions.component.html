@@ -105,13 +105,24 @@
         <ng-container matColumnDef="code">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button (click)="showCode(element.codejs)" style="border-radius: 100%;
+            <button (click)="showCode(element.codejs)" style="border-radius:
+              100%;
               color:rgb(26, 78, 67); background-color: white"><mat-icon
                 matListIcon>code</mat-icon> </button>
           </td>
         </ng-container>
 
-
+        <ng-container matColumnDef="dependencias">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+              <button (click)="showDepend(element.id)" style="border-radius:
+                100%;
+                color:rgb(26, 78, 67); background-color: white">
+                <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDQ3IDQ3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NyA0NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnIGlkPSJMYXllcl8xXzNfIj4KCQk8cGF0aCBkPSJNNDcsMTQuOTU1VjIuMTM2QzQ3LDAuOTU2LDQ2LjA0MywwLDQ0Ljg2MywwSDMyLjA0NmMtMS4xODEsMC0yLjEzNywwLjk1Ny0yLjEzNywyLjEzNnY1LjM0MSAgICBjLTEwLjQzNiwwLTE5LjIwNCw3LjE3My0yMS42OTgsMTYuODQxTDUuOTksMjMuOTI3Yy0wLjM5OS0wLjA2OS0wLjgwMywwLjA5MS0xLjA0NCwwLjQxNmMtMC4yNCwwLjMyNS0wLjI3OCwwLjc1OS0wLjA5NSwxLjEyICAgIGwyLjMxNCw0LjU2OUMzLjEwOSwzMC42OTMsMCwzNC4yMTMsMCwzOC40NTVDMCw0My4xNjcsMy44MzQsNDcsOC41NDYsNDdjNC4zNSwwLDcuOTQyLTMuMjcsOC40NzEtNy40NzdoNy41NTF2Mi4xMzYgICAgYzAsMC40MDUsMC4yMjksMC43NzQsMC41OTEsMC45NTZjMC4zNjIsMC4xOCwwLjc5NSwwLjE0MiwxLjEyLTAuMTAybDMuNzM0LTIuODAyYzAuNjEsNC4xMTYsNC4xNTgsNy4yODgsOC40NCw3LjI4OCAgICBDNDMuMTY2LDQ3LDQ3LDQzLjE2Nyw0NywzOC40NTVjMC00LjM1LTMuMjctNy45NDMtNy40NzktOC40NzF2LTcuNTUyaDIuMTM4YzAuNDAzLDAsMC43NzQtMC4yMjksMC45NTQtMC41OSAgICBjMC4xODItMC4zNjEsMC4xNDQtMC43OTUtMC4xLTEuMTE5bC0yLjcyNS0zLjYzMWg1LjA3MkM0Ni4wNDMsMTcuMDkxLDQ3LDE2LjEzNCw0NywxNC45NTV6IE04LjU0Niw0Mi43MjcgICAgYy0yLjM1NiwwLTQuMjczLTEuOTE2LTQuMjczLTQuMjcxczEuOTE3LTQuMjczLDQuMjczLTQuMjczczQuMjcyLDEuOTE4LDQuMjcyLDQuMjczUzEwLjkwMiw0Mi43MjcsOC41NDYsNDIuNzI3eiBNNDIuNzI5LDM4LjQ1NSAgICBjMCwyLjM1NS0xLjkxOCw0LjI3MS00LjI3Myw0LjI3MXMtNC4yNzEtMS45MTYtNC4yNzEtNC4yNzFzMS45MTYtNC4yNzMsNC4yNzEtNC4yNzNTNDIuNzI5LDM2LjEsNDIuNzI5LDM4LjQ1NXogTTM0LjI5NSwyMS44NDEgICAgYzAuMTgyLDAuMzYyLDAuNTUxLDAuNTksMC45NTUsMC41OWgyLjEzN3Y3LjU1MWMtMy43OTQsMC40NzgtNi44MTQsMy40NDctNy4zNzMsNy4yMTVsLTMuNzM2LTIuODAzICAgIGMtMC4zMjMtMC4yNDItMC43NTYtMC4yOC0xLjExOC0wLjEwMWMtMC4zNjEsMC4xODMtMC41OTEsMC41NTEtMC41OTEsMC45NTZ2Mi4xMzZoLTcuNTUxYy0wLjQ4NC0zLjg2Mi0zLjU1My02LjkyNy03LjQxOC03LjQwNSAgICBjMC4wMDMtMC4wMjQsMC4wMTUtMC4wNDUsMC4wMTUtMC4wNzFjMC0wLjAwNSwwLTAuMDA3LDAtMC4wMTFsMy4yMzMtMy4wMjdjMC4yOTUtMC4yNzYsMC40MDgtMC42OTYsMC4yOTQtMS4wODQgICAgYy0wLjExNy0wLjM4OS0wLjQ0LTAuNjc4LTAuODM5LTAuNzQ4bC0xLjk4My0wLjM1QzEyLjYzMiwxNi4wMjQsMjAuNTI2LDkuNjEzLDI5LjkxLDkuNjEzdjUuMzQxYzAsMS4xOCwwLjk1NiwyLjEzNiwyLjEzNywyLjEzNiAgICBoNS4wNzNsLTIuNzI0LDMuNjMyQzM0LjE1MiwyMS4wNDYsMzQuMTEzLDIxLjQ3OSwzNC4yOTUsMjEuODQxeiBNNDIuNzI5LDEyLjgxOGgtOC41NDdWNC4yNzNoOC41NDdWMTIuODE4eiIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
+              </button>
+            </td>
+          </ng-container>
+        
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>

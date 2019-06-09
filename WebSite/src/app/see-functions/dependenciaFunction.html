@@ -1,0 +1,23 @@
+
+
+<div>
+    <mat-list>
+        <mat-list-item *ngFor="let v of data.versiones">
+            <mat-icon matListIcon>code</mat-icon>
+            <p matLine style="color:rgb(62, 109, 197)">
+                {{v.nombre}}
+            </p>
+
+            <p matLine>
+                <span class="demo-2"> <i>{{v.descripcion}}</i> </span>
+            </p>
+            <hr style="color: black">
+        </mat-list-item>
+    </mat-list>
+</div>
+<p matLine *ngIf="data.versiones.length==0">
+        <strong class="demo-2"> Esta función no posee dependencias</strong>
+    </p>
+<div>
+
+</div>

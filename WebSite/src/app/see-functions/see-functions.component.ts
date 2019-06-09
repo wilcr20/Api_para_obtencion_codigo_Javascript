@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 export interface FunctionElement {
   id: number;
   id_usuario: number;
@@ -17,6 +16,12 @@ export interface FunctionElement {
 export interface codeFunction{
   code:string;
 }
+
+export interface DependeciaFunction{
+  nombre:string;
+  descripcion:string;
+}
+
 
 
 @Component({
@@ -31,6 +36,7 @@ export class SeeFunctionsComponent implements OnInit {
   listaResultadobusqueda: FunctionElement[] = [];
   listaDueñoFunciones: any = [];
   listaEtiquetasFunciones: any = [];
+  versionesF:any=[];
 
   nombre = "";
   descrip = "";
@@ -39,7 +45,7 @@ export class SeeFunctionsComponent implements OnInit {
 
   constructor(private _snackBar: MatSnackBar, public dialog: MatDialog) { }
 
-  displayedColumns: string[] = ['nombre', 'descripcion', 'vecesutilizadas', 'id','code'];
+  displayedColumns: string[] = ['nombre', 'descripcion', 'vecesutilizadas', 'id','code','dependencias'];
   dataSource = new MatTableDataSource<FunctionElement>(this.listaResultadobusqueda);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -52,8 +58,10 @@ export class SeeFunctionsComponent implements OnInit {
   }
 
   showURL(el) {
-    this._snackBar.open('https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion='+el, "OK!", {
-      duration: 4000,
+    let url = 'https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion='+el;
+    let newUrl = '"' +url+  '"';
+    this._snackBar.open(' <script src= '+newUrl+'> </script> ', "OK!", {
+      duration: 5500,
     });
   }
 
@@ -65,6 +73,22 @@ export class SeeFunctionsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  showDepend(el){
+    this.versionesF= []
+    this.obtenerVersionesFuncion(el)
+    setTimeout(() => {
+      console.log("VERSIONES: ", this.versionesF)
+      
+      const dialogRef = this.dialog.open(DependenciaFunction, {
+        data: { versiones: this.versionesF }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+
+    }, 700);
+    
   }
 
 
@@ -105,6 +129,24 @@ export class SeeFunctionsComponent implements OnInit {
     //  xhttp.withCredentials = true;
     xhttp.send();
   }
+
+  async obtenerVersionesFuncion(idFuncion) {
+    var xhttp;
+    var oldThis = this;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerVersiones?idFuncion="+idFuncion, true);
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let data = JSON.parse(this.responseText);
+        console.log("DATA VERSIONES: ", data)
+        oldThis.versionesF= data.versiones;
+      }
+    }
+    //  xhttp.withCredentials = true;
+    xhttp.send();
+  }
+
+
 
   uneEtiquetas() {
     let etiquetasUsar: string = "";
@@ -283,4 +325,13 @@ export class SeeFunctionsComponent implements OnInit {
 })
 export class SeeCodeFunction {
   constructor(@Inject(MAT_DIALOG_DATA) public data: codeFunction) {}
+}
+
+
+@Component({
+  selector: 'DependenciaFunction',
+  templateUrl: 'dependenciaFunction.html',
+})
+export class DependenciaFunction {
+  constructor(@Inject(MAT_DIALOG_DATA) public data:DependeciaFunction[]) {}
 }
