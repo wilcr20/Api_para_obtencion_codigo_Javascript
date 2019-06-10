@@ -68,13 +68,20 @@ export class LoginComponent implements OnInit {
         console.log(this.responseText)
         let response = this.responseText;
         response = JSON.parse(response)
-        localStorage.setItem('nombreUsuario', response.nombreUsuario);
-        localStorage.setItem('idUsuario', response.idUsuario);
 
-        oldThis.openSnackBar('Bienvenido', 'Login');
-        oldThis.router.navigate(['/user']);
-      }
-      else {
+        if (response.state == 0) {
+          localStorage.setItem('nombreUsuario', response.nombreUsuario);
+          localStorage.setItem('idUsuario', response.idUsuario);
+
+          oldThis.openSnackBar('Bienvenido', 'Login');
+          oldThis.router.navigate(['/user']);
+        }else{
+          oldThis.openSnackBar('Error al iniciar sesión, inténtalo de nuevo', 'Error')
+        }
+
+
+
+      }else {
         oldThis.openSnackBar('Error al iniciar sesión, inténtalo de nuevo', 'Error')
       }
     }

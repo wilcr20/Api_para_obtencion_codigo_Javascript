@@ -178,9 +178,7 @@ export class RegisterFunctionComponent implements OnInit {
     let funcionesSeleccionadas = this.selection.selected;
     let dependencias: string ="";
     let dependencia;
-    for (dependencia in funcionesSeleccionadas){
-
-      
+    for (dependencia in funcionesSeleccionadas){    
       if (dependencias == ""){
         
         dependencias = dependencias + funcionesSeleccionadas[dependencia].id;
@@ -280,6 +278,7 @@ export class RegisterFunctionComponent implements OnInit {
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText)
           oldThis.obtenerFuncionesBD() //Acutualiza la lista de funciones
           oldThis._snackBar.open("Función registrada", " OK! ", {
             duration: 4000});
@@ -288,7 +287,8 @@ export class RegisterFunctionComponent implements OnInit {
         }
       }
      // xhttp.withCredentials = true;
-      xhttp.send("idUsuario="+ this.idUsuario.toString()+"&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
+     console.log("idUsuario="+ this.idUsuario+"&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas)
+      xhttp.send("idUsuario="+ this.idUsuario+"&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
     
    
 

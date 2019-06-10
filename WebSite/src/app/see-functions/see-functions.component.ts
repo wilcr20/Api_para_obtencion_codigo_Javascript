@@ -88,9 +88,7 @@ export class SeeFunctionsComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
       });
-
     }, 700);
-    
   }
 
   async obtenerFuncionesBD() {
@@ -276,7 +274,7 @@ export class SeeFunctionsComponent implements OnInit {
           for (var keyE in this.listaEtiquetasFunciones) {
             if (keyE == idFuncion) {
               for (let etiqueta = 0; etiqueta < this.listaEtiquetasFunciones[keyE].length; etiqueta++) {
-                let e = this.listaEtiquetasFunciones[keyE][etiqueta];
+                let e = this.listaEtiquetasFunciones[keyE][etiqueta];    
                 if (e.id_etiqueta == etiquetasBusca[i]) {
                   newListResult.push(this.listaFunciones[keyF])
                 }
@@ -285,29 +283,71 @@ export class SeeFunctionsComponent implements OnInit {
           }
         }
       }
+
+      let listaR:FunctionElement[]= this.fitrarListaRepetidas(newListResult)
+      this.listaResultadobusqueda = listaR;
     }
+
+
+
     if (this.listaResultadobusqueda.length > 0) { //Si ya hay resultados en lita, filtrarla
       for (let i = 0; i < etiquetasBusca.length; i++) {  //Recorre cada etiqueta de las buscadas 1,2,5,7
+        let contRes=0;
         for (var keyF in this.listaResultadobusqueda) {  // Recorre y obtiene cada key de todas las funciones        
           let idFuncion = this.listaResultadobusqueda[keyF].id; // Id de cada funcion
+
           for (var keyE in this.listaEtiquetasFunciones) {
             if (keyE.toString() == idFuncion.toString()) {
+
               for (let etiqueta = 0; etiqueta < this.listaEtiquetasFunciones[keyE].length; etiqueta++) {
                 let e = this.listaEtiquetasFunciones[keyE][etiqueta];
                 if (e.id_etiqueta == etiquetasBusca[i]) {
-                  newListResult.push(this.listaFunciones[keyF])
+                  let existe= this.verifyExistence(this.listaFunciones[keyF],this.listaResultadobusqueda)
+                  if(existe){
+                    if (this.listaResultadobusqueda[contRes] ==  this.listaFunciones[keyF]){
+                      newListResult.push(this.listaFunciones[keyF])
+                    }
+                  }
+
                 }
               }
             }
           }
+          contRes++;
         }
       }
     }
-
-    this.listaResultadobusqueda = newListResult;
-
+    
+    
   }
 
+
+  verifyExistence(funct,lista){
+    for (let index = 0; index < lista.length; index++) {
+      let element = lista[index];
+      if(lista[index] === funct){
+        return true;
+      }
+      
+    }
+    return false;
+  }
+
+  lista:FunctionElement[]=[];
+
+  fitrarListaRepetidas(newListResult){
+    
+    for (let index = 0; index < newListResult.length; index++) {
+      let funcionActual = newListResult[index];
+
+      let existe = this.verifyExistence(funcionActual,this.lista);
+      console.log(existe)
+      if(existe == false){
+        this.lista.push(funcionActual);
+      }
+    }
+    return this.lista;
+  }
 
 
   resetForm() {

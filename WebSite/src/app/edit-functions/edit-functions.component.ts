@@ -23,15 +23,15 @@ export class EditFunctionsComponent implements OnInit {
   private pageSizeOptions: number[] = [5, 10, 25, 100];
   private displayedColumns: string[] = ['select', 'nombre', 'descripcion', 'vecesutilizadas'];
 
-  private firstFormGroup: FormGroup;
+  private firstFormGroup: FormGroup;  
   private secondFormGroup: FormGroup;
-  private selectFunction: Object = {}
+  private selectFunction: any = {}
 
   private idUsuario: number;
   private loading = true;
 
   private ELEMENT_DATA: FunctionElement[] = [];
-  private ALL_DATA: Object = {};
+  private ALL_DATA:any = {};
   private dataSource = new MatTableDataSource<FunctionElement>(this.ELEMENT_DATA);
   private listaFunciones = new MatTableDataSource<FunctionElement>([]);
   private listaEtiquetas: any = [];
