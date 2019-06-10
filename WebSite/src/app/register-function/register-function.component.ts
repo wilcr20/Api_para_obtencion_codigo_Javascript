@@ -4,6 +4,7 @@ import { ErrorStateMatcher} from '@angular/material/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material';
 
 export interface FunctionElement {
   id: number;
@@ -33,7 +34,7 @@ export class RegisterFunctionComponent implements OnInit {
   nombreFuncion="";
   descFuncion="";
   codeFuncion="";
-
+  idUsuario:number; 
   isLinear=false;
 
 
@@ -56,7 +57,10 @@ export class RegisterFunctionComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar) { 
+
+    this.idUsuario= parseInt(localStorage.getItem("idUsuario"));
+  }
 
   listaEtiquetas: any = [];
 
@@ -210,27 +214,75 @@ export class RegisterFunctionComponent implements OnInit {
 
   }
 
+  checkForFunctionName(){
+
+    let lowerCode = this.codeFuncion.toLowerCase();
+
+    let index = lowerCode.search("function");
+
+    //la palabra function tiene que existir y ser lo primero en el código 
+    if (index==-1 || index!=0){
+      return [false,"El código de la función debe iniciar con la palabra function"]
+    }
+    let limit = lowerCode.length;
+    index+= 9
+    let functionName="";
+
+    while( index < limit && this.codeFuncion[index]!="("){
+      functionName += this.codeFuncion[index];
+      index++;
+    }
+
+
+
+    if (this.nombreFuncion == functionName){
+
+      return [true,""];
+
+    }
+
+    else{
+      return [false,"El nombre de la función especificado y el utilizado en el código no coinciden"];
+    }
+
+    
+
+  }
+  
+
   async registerFunction() {
+
+    let checkFunctionName= this.checkForFunctionName();
+    if (!checkFunctionName[0]){
+      this._snackBar.open(checkFunctionName[1].toString(), "Advertencia", {
+        duration: 6000});
+      
+      return;
+    }
 
     var etiquetas = this.uneEtiquetas();
     var dependencias = this.uneDependencias()
     console.log(etiquetas.split(" "))
     var oldThis = this;
 
+
+
     var xhttp;
       xhttp = new XMLHttpRequest();
-      xhttp.withCredentials = true;
+     // xhttp.withCredentials = true;
       xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarFuncion", true);
       xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           oldThis.obtenerFuncionesBD() //Acutualiza la lista de funciones
-          alert("Funcion agregada correctamente. Actualizando .....")
+          oldThis._snackBar.open("Función registrada", " OK! ", {
+            duration: 4000});
           oldThis.resetForm()
+          
         }
       }
      // xhttp.withCredentials = true;
-      xhttp.send("idUsuario=1&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
+      xhttp.send("idUsuario="+ this.idUsuario.toString()+"&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
     
    
   }

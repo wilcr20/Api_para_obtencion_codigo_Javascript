@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mainSeeContainer">
   <mat-card-title>
     Búsqueda de Funciones
   </mat-card-title>
@@ -74,8 +74,19 @@
 
   <div style="padding: 2%;"></div>
 
-  <div>
+
+      
+   
+
+     
+  <div >
+
+      <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar por nombre, descripción o cantidad de veces utilizada">
+      </mat-form-field>
+    
     <div class="mat-elevation-z8">
+        
       <table mat-table [dataSource]="dataSource" style="width: 100%;">
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef> Nombre </th>
