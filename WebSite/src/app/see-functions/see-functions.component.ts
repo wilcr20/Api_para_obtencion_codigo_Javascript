@@ -63,9 +63,8 @@ export class SeeFunctionsComponent implements OnInit {
 
   showURL(el) {
     let url = 'https://dynamiclibraryjdl.herokuapp.com/importarFuncion?idFuncion='+el;
-    let newUrl = '"' +url+  '"';
 
-    this._snackBar.open(newUrl, "OK!", {
+    this._snackBar.open(url, "OK!", {
       duration: 6000,
     });
   }
