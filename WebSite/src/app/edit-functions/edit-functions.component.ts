@@ -4,7 +4,7 @@ import { delay } from 'q';
 import { PageEvent } from '@angular/material/paginator';
 import { FunctionElement } from "./function.interface";
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, MatStepper } from '@angular/material';
+import { MatPaginator, MatStepper, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MyErrorStateMatcher } from '../register-function/register-function.component';
 
@@ -60,7 +60,8 @@ export class EditFunctionsComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private changeDetectorRefs: ChangeDetectorRef,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {
     this.idUsuario = parseInt(localStorage.getItem('idUsuario'));
 
@@ -160,7 +161,7 @@ export class EditFunctionsComponent implements OnInit {
     for (let index = 0; index < checkList.length; index++) { // busco las etiquetas y les pongo check en true
       let c = checkList[index] as HTMLInputElement;
       let id = c.id.split(",")[1].split("-")[0];
-      
+
       for (let i in etiquetas) {
         if (id == etiquetas[parseInt(i)].id_etiqueta) {
           c.checked = true;
@@ -170,51 +171,52 @@ export class EditFunctionsComponent implements OnInit {
     }
   }
 
-  selectFunciones() {
-    let checkList = document.getElementsByName("dependencia"); //Lista de documentos HTML tipo checkbox etiquetas
+  selectFunciones(event?: PageEvent) {
+    console.log(this.selection2.selected)
+    console.log(this.listaFunciones.data)
+    var funciones: FunctionElement[] = []
     var functionsDependencies = [];
     for (var fun in this.ALL_DATA.functionsDependencies) { // obtengo las etiquetas de la funcion seleccionada
       if (this.selectFunction.id == fun) {
         functionsDependencies = this.ALL_DATA.functionsDependencies[parseInt(fun)]
-        console.log(functionsDependencies)
       }
     }
+    console.log(functionsDependencies)
 
-    for (let index = 0; index < checkList.length; index++) { // busco las etiquetas y les pongo check en true
-      let c = checkList[index] as HTMLInputElement;
-      let id = c.id.split(",")[1].split("-")[0];
-      
-      for (let i in functionsDependencies) {
-
-        console.log(checkList)
-        if (id == functionsDependencies[parseInt(i)].id_dependencia) {
-          c.checked = true;
-          c.click()
-        }
+    for (let funcDep in functionsDependencies) {
+      for (let func in this.listaFunciones.data) {
+        if (this.listaFunciones.data[parseInt(func)].id == functionsDependencies[parseInt(funcDep)].id_dependencia)
+          funciones.push(this.listaFunciones.data[parseInt(func)])
       }
+      //this.selection2.selected.push(functionsDependencies[i])
     }
+    //console.log(funciones)
+    this.selection2 = new SelectionModel<FunctionElement>(true, [...this.selection2.selected, ...funciones])
+
   }
 
-  guardar(){
+  guardar() {
     var etiquetas = this.uneEtiquetas();
     var dependencias = this.uneDependencias()
 
     var oldThis = this;
 
     var xhttp;
-      xhttp = new XMLHttpRequest();
-      xhttp.withCredentials = true;
-      xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarFuncion", true);
-      xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          oldThis.obtenerFuncionesBD() //Acutualiza la lista de funciones
-          oldThis.selectFunction = {}
-        }
+    xhttp = new XMLHttpRequest();
+    //xhttp.withCredentials = true;
+    xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/registrarFuncion", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        oldThis._snackBar.open("Función registrada", " OK! ", {
+          duration: 4000});
+        oldThis.obtenerFuncionesBD() //Acutualiza la lista de funciones
+        oldThis.selectFunction = {}
       }
-     // xhttp.withCredentials = true;
-      xhttp.send("idUsuario="+this.idUsuario+"&nombre="+oldThis.selectFunction.nombre+"&descripcion="+oldThis.selectFunction.descripcion+"&codigo="+oldThis.codejs+"&dependencias="+dependencias+"&etiquetas="+etiquetas+"&idFuncionOriginal="+this.selectFunction.id );
-   
+    }
+    // xhttp.withCredentials = true;
+    xhttp.send("idUsuario=" + this.idUsuario + "&nombre=" + oldThis.selectFunction.nombre + "&descripcion=" + oldThis.selectFunction.descripcion + "&codigo=" + oldThis.selectFunction.codejs + "&dependencias=" + dependencias + "&etiquetas=" + etiquetas + "&idFuncionOriginal=" + this.selectFunction.id);
+
   }
 
   async obtenerEtiquetasBD() {
@@ -226,7 +228,7 @@ export class EditFunctionsComponent implements OnInit {
       if (this.readyState == 4 && this.status == 200) {
         let data = JSON.parse(this.responseText);
         for (var tag in data.data) {
-          data.data[parseInt(tag)] = {...data.data[parseInt(tag)], checked: false}
+          data.data[parseInt(tag)] = { ...data.data[parseInt(tag)], checked: false }
         }
         oldThis.listaEtiquetas = data.data;
         //console.log(oldThis.listaEtiquetas)
@@ -238,19 +240,22 @@ export class EditFunctionsComponent implements OnInit {
   }
 
   uneDependencias() {
-    let dependeciasUsar: string = "";
-    let checkList = document.getElementsByName("dependencia"); //Lista de documentos HTML tipo checkbox dependencias
+    let funcionesSeleccionadas = this.selection.selected;
+    let dependencias: string = "";
+    let dependencia;
+    for (dependencia in funcionesSeleccionadas) {
 
-    for (let index = 0; index < checkList.length; index++) {
-      let c = checkList[index] as HTMLInputElement;
-      if (c.checked) { //Si esta seleccionada
-        let id = c.id.split(",")[1].split("-")[0];
-        if(dependeciasUsar== ""){dependeciasUsar = dependeciasUsar + id;}else{
-          dependeciasUsar= dependeciasUsar+" "+ id;
-        }
+
+      if (dependencias == "") {
+
+        dependencias = dependencias + funcionesSeleccionadas[dependencia].id;
+      }
+      else {
+        dependencias = dependencias + " " + funcionesSeleccionadas[dependencia].id;
       }
     }
-    return dependeciasUsar;  // Type: "1 2 5 34"
+
+    return dependencias;
   }
 
   uneEtiquetas() {
@@ -304,10 +309,11 @@ export class EditFunctionsComponent implements OnInit {
     xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones?" + "porUsuario=" + this.idUsuario, true);
     xhttp.send();
   }
+
   async obtenerFuncionesBD() {
     var xhttp;
     var oldThis = this;
-    
+
     xhttp = new XMLHttpRequest();
     xhttp.open("GET", "https://dynamiclibraryjdl.herokuapp.com/obtenerFuncionesReducido?porUsuario=0", true);
     xhttp.onreadystatechange = function () {
@@ -318,10 +324,10 @@ export class EditFunctionsComponent implements OnInit {
         oldThis.listaFunciones = new MatTableDataSource<FunctionElement>(data.functions);
         oldThis.changeDetectorRefs.detectChanges();
         oldThis.listaFunciones.paginator = oldThis.paginator2;
-        oldThis.dataSource._renderChangesSubscription        
+        oldThis.dataSource._renderChangesSubscription
       }
     }
- //   xhttp.withCredentials = true;
+    //   xhttp.withCredentials = true;
     xhttp.send();
   }
 

@@ -96,8 +96,7 @@
       <!--Tags-->
       <mat-accordion>
         <h4><u>Etiquetas a utilizar</u> </h4>
-        <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}"
-          *ngFor="let item of listaEtiquetas">
+        <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}" *ngFor="let item of listaEtiquetas">
           {{item.nombre}} </mat-checkbox>
       </mat-accordion>
 
@@ -153,7 +152,8 @@
 
         </table>
 
-        <mat-paginator #matPaginator2 [length]="listaFunciones.data.length" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"></mat-paginator>
+        <mat-paginator #matPaginator2 [length]="listaFunciones.data.length" [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize" (page)="pageEvent = selectFunciones($event)"></mat-paginator>
 
       </div>
 
@@ -169,7 +169,7 @@
       Guardar la función.
       <div>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button (click)="stepper.reset()">Inicio</button>        
+        <button mat-button (click)="stepper.reset()">Inicio</button>
         <button mat-button (click)="guardar()">Guardar</button>
       </div>
     </mat-step>
