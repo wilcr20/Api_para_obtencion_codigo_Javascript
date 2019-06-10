@@ -1,15 +1,12 @@
-<div class="container">
+<div class="container mainRegisterFunction">
   <mat-card-title>
     Mis funciones
   </mat-card-title><br>
 
-  <mat-horizontal-stepper [linear]="false" #stepper class="background">
+  <mat-horizontal-stepper [linear]="next" #stepper class="background">
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Seleccione la función a editar</ng-template>
 
-      <div class="spinner-container" *ngIf="loading">
-        <mat-spinner></mat-spinner>
-      </div>
 
       <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
         <mat-form-field>
@@ -22,35 +19,41 @@
         <ng-container matColumnDef="select">
           <th *matHeaderCellDef></th>
           <td *matCellDef="let element">
-            <mat-checkbox (click)="onRowClicked(row)" (change)="$event ? selectItem(element) : null"
-              [checked]="selection.isSelected(element)">
+            <mat-checkbox (change)="$event ? selectItem(element) : null" [checked]="selection.isSelected(element)">
             </mat-checkbox>
           </td>
         </ng-container>
 
         <!-- Position Column -->
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Nombre </th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}">
+            <h4> <b>Nombre </b> </h4>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Descripción </th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}">
+            <h4> <b>Descripción </b> </h4>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="vecesutilizadas">
-          <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}"> Veces utilizadas </th>
+          <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}">
+            <h4> <b>Veces utilizadas </b> </h4>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.vecesutilizadas}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
-      <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+
+      <mat-paginator [length]="dataSource.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
         (page)="pageEvent = $event">
       </mat-paginator>
 
@@ -58,25 +61,118 @@
         <button mat-button matStepperNext>Siguiente</button>
       </div>
     </mat-step>
+
     <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Editar</ng-template>
+      <ng-template matStepLabel>Editar</ng-template>
+      <!--Nombre-->
+      <mat-form-field>
+        <input autocomplete="off" [(ngModel)]="selectFunction.nombre" matInput placeholder="Nombre de
+          la función" [formControl]="textFormControl" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="textFormControl.hasError('required')">
+          Por favor complete este campo.
+        </mat-error>
+      </mat-form-field>
+
+      <!--Descripcion-->
+      <mat-form-field>
+        <textarea autocomplete="off" [(ngModel)]="selectFunction.descripcion" rows="4" cols="70" matInput
+          placeholder="Descripción de la función" [formControl]="descrFormControl"
+          [errorStateMatcher]="matcher"></textarea>
+        <mat-error *ngIf="descrFormControl.hasError('required')">
+          Por favor complete este campo.
+        </mat-error>
+      </mat-form-field>
+
+      <!--Code-->
+      <mat-form-field>
+        <textarea autocomplete="off" [(ngModel)]="selectFunction.codejs" rows="5" cols="70" matInput
+          placeholder="Coloque el código fuente de la función aquí." [formControl]="codeFormControl"
+          [errorStateMatcher]="matcher"></textarea>
+        <mat-error *ngIf="codeFormControl.hasError('required')">
+          Por favor complete este campo.
+        </mat-error>
+      </mat-form-field>
+
+      <!--Tags-->
+      <mat-accordion>
+        <h4><u>Etiquetas a utilizar</u> </h4>
+        <mat-checkbox name="etiqueta" class="checks" id="check,{{item.id}}" *ngFor="let item of listaEtiquetas">
+          {{item.nombre}} </mat-checkbox>
+      </mat-accordion>
+
+      <div>
+        <h4> Dependencia a otras funciones </h4>
         <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+          <input matInput (keyup)="applyFilter1($event.target.value)"
+            placeholder="Filtro por nombre y descripción de la función">
         </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
+        <table mat-table [dataSource]="listaFunciones" matSort>
+
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle2() : null"
+                [checked]="selection2.hasValue() && isAllSelected2()"
+                [indeterminate]="selection2.hasValue() && !isAllSelected2()" [aria-label]="checkboxLabel2()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox name="dependencia" id="depend,{{row.id}}" (click)="$event.stopPropagation()"
+                (change)="$event ? selection2.toggle(row) : null" [checked]="selection2.isSelected(row)"
+                [aria-label]="checkboxLabel2(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef>
+              <h4> <b>Nombre </b> </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef>
+              <h4> <b> Descripción </b> </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vecesutilizadas">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'font-size':'15px'}">
+              <h4> <b>Veces utilizadas </b> </h4>
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.vecesutilizadas}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row2; columns: displayedColumns;" (click)="selection2.toggle(row2)">
+          </tr>
+
+        </table>
+
+        <mat-paginator #matPaginator2 [length]="listaFunciones.data.length" [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize" (page)="pageEvent = selectFunciones($event)"></mat-paginator>
+
+      </div>
+
+
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
+      </div>
     </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Guardar</ng-template>
       Guardar la función.
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button (click)="stepper.reset()">Inicio</button>
+        <button mat-button (click)="guardar()">Guardar</button>
       </div>
     </mat-step>
+
   </mat-horizontal-stepper>
 </div>
