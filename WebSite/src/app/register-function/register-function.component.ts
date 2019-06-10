@@ -124,6 +124,8 @@ export class RegisterFunctionComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.listaFunciones.filter = filterValue.trim().toLowerCase();
   }
+
+
  
   async obtenerFuncionesBD() {
     var xhttp;
@@ -172,19 +174,24 @@ export class RegisterFunctionComponent implements OnInit {
 
   
   uneDependencias() {
-    let dependeciasUsar: string = "";
-    let checkList = document.getElementsByName("dependencia"); //Lista de documentos HTML tipo checkbox dependencias
+    
+    let funcionesSeleccionadas = this.selection.selected;
+    let dependencias: string ="";
+    let dependencia;
+    for (dependencia in funcionesSeleccionadas){
 
-    for (let index = 0; index < checkList.length; index++) {
-      let c = checkList[index] as HTMLInputElement;
-      if (c.checked) { //Si esta seleccionada
-        let id = c.id.split(",")[1].split("-")[0];
-        if(dependeciasUsar== ""){dependeciasUsar = dependeciasUsar + id;}else{
-          dependeciasUsar= dependeciasUsar+" "+ id;
-        }
+      
+      if (dependencias == ""){
+        
+        dependencias = dependencias + funcionesSeleccionadas[dependencia].id;
+      }
+      else{
+        dependencias = dependencias +" "+ funcionesSeleccionadas[dependencia].id;
       }
     }
-    return dependeciasUsar;  // Type: "1 2 5 34"
+   
+    return dependencias;  
+    
   }
 
   uneEtiquetas() {
@@ -262,9 +269,8 @@ export class RegisterFunctionComponent implements OnInit {
 
     var etiquetas = this.uneEtiquetas();
     var dependencias = this.uneDependencias()
-    console.log(etiquetas.split(" "))
+    
     var oldThis = this;
-
 
 
     var xhttp;
@@ -285,6 +291,7 @@ export class RegisterFunctionComponent implements OnInit {
       xhttp.send("idUsuario="+ this.idUsuario.toString()+"&nombre="+this.nombreFuncion+"&descripcion="+this.descFuncion+"&codigo="+this.codeFuncion+"&dependencias="+dependencias+"&etiquetas="+etiquetas );
     
    
+
   }
 
 
