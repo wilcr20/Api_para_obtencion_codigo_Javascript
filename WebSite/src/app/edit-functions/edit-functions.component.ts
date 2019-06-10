@@ -240,7 +240,7 @@ export class EditFunctionsComponent implements OnInit {
   }
 
   uneDependencias() {
-    let funcionesSeleccionadas = this.selection.selected;
+    let funcionesSeleccionadas = this.selection2.selected;
     let dependencias: string = "";
     let dependencia;
     for (dependencia in funcionesSeleccionadas) {
