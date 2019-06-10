@@ -13,8 +13,7 @@ const routes: Routes = [
 
   { path: '',   component: FullComponent, 
     children :[
-        {   path: '', redirectTo: 'functions', pathMatch: 'full' },
-        {   path: 'functions',   component: UserFunctionsComponent},
+        {   path: '', redirectTo: 'seeFunctions', pathMatch: 'full' },
         {   path: 'newFunction',   component: RegisterFunctionComponent},
         {   path: 'seeFunctions',   component: SeeFunctionsComponent},
         {   path: 'editFunction',   component: EditFunctionsComponent}

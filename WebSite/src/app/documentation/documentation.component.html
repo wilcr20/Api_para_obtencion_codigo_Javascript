@@ -9,6 +9,8 @@
     <li class="docIndexOption"> Consideraciones Generales </li>
     <li class="docIndexOption"> Importación del núcleo de la librería</li>
     <li class="docIndexOption"> Importación individual de funciones </li>
+    <li class="docIndexOption"> Registro de funciones </li>
+    <li class="docIndexOption"> Edición de funciones </li>
     <li class="docIndexOption"> Búsqueda de funciones </li>
   </ul>
 
@@ -70,7 +72,7 @@
   <br><br>
   <div class="subtitle2">
 
-    <img src="../../assets/images/coreLib.PNG" alt="JDL Core" height="60%"
+    <img src="../../assets/images/coreFun.PNG" alt="JDL Core" height="60%"
       width="60%">
 
   </div>
@@ -110,7 +112,7 @@
   <br><br>
   <div class="subtitle2">
 
-    <img src="../../assets/images/coreFun.PNG" alt="JDL Importar Función"
+    <img src="../../assets/images/coreLib.PNG" alt="JDL Importar Función"
       height="60%" width="60%">
 
   </div>
@@ -123,17 +125,91 @@
   importada procesa un arreglo y retorna un valor
   que para fines de la documentación no posee relevancia.
 
-  <br> <br> <br>
+  <br> 
 
-<div id="coreImport" class="docContent">
+<div id="functionRegister" class="docContent">
+  
+  <h2> Registro de funciones </h2>
+
+Para registrar una función en la librería de javascript dinámica se debe especificar la siguiente información:
+<br><br>
+<ol>
+
+  <li> <span><b> Nombre de la función: </b></span> En JDL aspiramos a la excelencia. Por lo que solicitamos a las
+    personas que utilicen el sistema que utilicen nombres representativos para sus funciones. Ya que esto facilita la búsqueda
+    de la misma.
+  </li> <br>
+
+  <li> <span><b> Descripción de la función: </b></span>
+    Breve y concisa. Que considere todos los aspectos de relevancia con respecto al cómo opera la función.
+  </li> <br>
+
+
+  <li> <span><b> Código javascript: </b></span>
+    Código fuente de la función. Utilizar nombres de variables  representativos.
+  </li> <br>
+
+  <li> <span><b> Etiquetas: </b></span>
+    Se trata de una categoría para la función. Seleccionar la o las categorías
+    indicadas para su función provocará que está sea fácil de encontrar. El sistema posibilita que indique etiquetas tan solo con
+    seleccionarlas. Si la etiqueta que desea no se encuentra en la lista de etiquetas puede optar por ingresar una, siguiendo siempre
+    el estándar de utilizar la primera letra en mayúscula y el resto en minúsculas.
+  </li> <br>
+
+  <li> <span><b> Dependencias:</b></span>
+    En caso de que su función necesite utilizar otra función conocida por el 
+    sistema para operar deberá indicarlo a través de la interfaz. Solo debe seleccionar aquellas funciones de las que depende su función, 
+    de esta manera el sistema podrá cargar todas las dependencias cuando su función sea importada en cualquier página web.
+  </li> <br>
+</ol>  
+
+A continuación se adjuntan algunas imágenes que aluden al registro de funciones: <br> <br>
+
+<img src="../../assets/images/fr1.PNG" alt="Registro Función Datos Generales" height="60%"
+        width="80%">
+      <br><br>
+
+<img src="../../assets/images/fr2.PNG" alt="Registro Función Etiquetas" height="60%"
+      width="80%">
+    <br><br>
+
+<img src="../../assets/images/fr3.PNG" alt="Registro Función Dependencias" height="60%"
+    width="80%">
+
+</div>
+
+<div id="functionEdit" class="docContent">
+    <h2> Edición de funciones </h2>
+
+    Existe la posibilidad de modificar cada una de las funciones del sistema. No obstante, deben considerarse los siguientes
+    aspectos: <br><br>
+
+    <ul>
+
+        <li>  Al editar una función, el sistema le cargará automáticamente toda la información de la misma. Esto incluye el
+          nombre, descripción, código javascript, las etiquetas y dependencias. Así, queda en manos del usuario
+          el eliminar o agregar etiquetas y/o dependencias y la manipulación de los demás datos de la función.
+          </li> <br>
+
+        <li>  Cada edición de la función implica la generación de una nueva. Al editar una función se crea una versión de la misma que 
+          se diferencia por los cambios realizados. De esta manera la cantidad de versiones que puede tener una función corresponde
+          a la cantidad de veces que haya sido editada.
+        </li> <br>
+    
+    </ul>
+
+</div>
+
+<div id="functionSearch" class="docContent">
   <h2> Búsqueda de funciones </h2>
 
   En el caso de la búsqueda de funciones, se podrá realizar un filtrado muy
-  completo sobre todas las funciones existentes en el sistema.
-    Para ello se prporciona una vista similar a la siguiente mostrada, en donde
+  completo sobre todas las funciones existentes en el sistema. Es posible conocer el código
+  javascript, la url de importación y las versiones para cada una de las funciones registradas.
+  <br>
+  Para ello se proporciona una vista similar a la siguiente, en donde
     solo será cuestión de ingresar los datos o seleccionar las opciones
-    chekeables
-  para asi lograr hallar lo más proximo encontrado a su busqueda esperada.
+    disponibles para asi lograr hallar la función que requiere.
     <br><br>
     <div class="subtitle2">
 

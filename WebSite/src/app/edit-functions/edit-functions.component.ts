@@ -47,6 +47,7 @@ export class EditFunctionsComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
   }
+  
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
