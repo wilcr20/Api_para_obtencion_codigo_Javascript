@@ -43,7 +43,7 @@ export class UserFunctionsComponent implements OnInit {
     }    
     xhttp.open("POST", "https://dynamiclibraryjdl.herokuapp.com/obtenerFunciones?"+"porUsuario="+this.idUsuario, true);
     xhttp.send();
-    let delayres = await delay(2000);
+    let delayres = await delay(2500);
     //console.log(flag)
     this.functions = flag
     if(flag.length > 0)
