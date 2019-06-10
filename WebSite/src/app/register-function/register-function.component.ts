@@ -131,7 +131,7 @@ export class RegisterFunctionComponent implements OnInit {
       if (this.readyState == 4 && this.status == 200) {
         //console.log(this.responseText)
         let data = JSON.parse(this.responseText);
-        console.log(data);
+        //console.log(data);
         oldThis.listaFunciones = new MatTableDataSource<FunctionElement>(data.functions);
         oldThis.listaFunciones.paginator = oldThis.paginator;
         

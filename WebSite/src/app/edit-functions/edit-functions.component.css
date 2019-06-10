@@ -20,5 +20,8 @@ table {
   .mat-horizontal-content-container{
     padding: 0px 0px;
   }
-  
+  .mainRegisterFunction{
+    margin-right: 5%;
+    width: 100%;
+}
   
